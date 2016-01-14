@@ -9,6 +9,16 @@
 				return Array.from(document.querySelectorAll(sel));
 			}
 			self.addEventListener('load', event => {
+				$('[data-show-modal]').forEach(button => {
+					button.addEventListener('click', event => {
+						document.querySelector(event.target.dataset.showModal).showModal();
+					});
+				});
+				$('[data-close-modal]').forEach(button => {
+					button.addEventListener('click', event => {
+						document.querySelector(event.target.dataset.closeModal).close();
+					});
+				});
 				$('input[type="date"]').forEach(input => {
 
 				});
@@ -106,8 +116,8 @@
 			</form>
 		</main>
 		<footer>
-			<details>
-				<summary>Contact</summary>
+			<dialog id="contact-dialog">
+				<button type="button" data-close-modal="#contact-dialog">x</button><hr/>
 				<a href="mailto:editor@kvsun.com" title="Email">
 					<img src="images/octicons/svg/mail-read.svg" alt="Email" width="60" height="60"/>
 				</a>
@@ -120,7 +130,8 @@
 				<a href="https://github.com/KVSun/ad-insertion/issues/new" target="_blank" title="Open Issue">
 					<img src="images/octicons/svg/issue-opened.svg" alt="Open Issue" width="60" height="60"/>
 				</a>
-			</details>
+			</dialog>
+			<button type="button" data-show-modal="#contact-dialog">Contact</button>
 		</footer>
 	</body>
 </html>
