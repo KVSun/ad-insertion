@@ -1,6 +1,7 @@
 function $(sel) {
 	return Array.from(document.querySelectorAll(sel));
 }
+const TODAY = new InputDate();
 self.addEventListener('load', event => {
 	$('[data-show-modal]').forEach(button => {
 		button.addEventListener('click', event => {
@@ -13,7 +14,8 @@ self.addEventListener('load', event => {
 		});
 	});
 	$('input[type="date"]').forEach(input => {
-
+		input.min = TODAY;
+		input.value = TODAY;
 	});
 	$('form').forEach(form => {
 		form.addEventListener('submit', event => {
