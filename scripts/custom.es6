@@ -3,6 +3,10 @@ function $(sel) {
 }
 const TODAY = new InputDate();
 self.addEventListener('load', event => {
+	new Notification(document.title, {
+		body: document.querySelector('meta[name="description"]').content,
+		icon: document.querySelector('link[rel="icon"]').href
+	});
 	$('[data-show-modal]').forEach(button => {
 		button.addEventListener('click', event => {
 			document.querySelector(event.target.dataset.showModal).showModal();
