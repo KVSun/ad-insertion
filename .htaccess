@@ -1,6 +1,14 @@
 Options -Indexes +SymLinksIfOwnerMatch
 DirectoryIndex index.html
 
+#Configure PHP's autoloader and set include_path, min PHP version
+<IfModule env_module>
+	SetEnv MIN_PHP_VERSION 5.5
+	SetEnv CONFIG_DIR config
+	SetEnv AUTOLOAD_DIR classes
+	SetEnv AUTOLOAD_EXTS .php
+	SetEnv AUTOLOAD_FUNC spl_autoload
+</IfModule>
 <IfModule headers_module>
 	Header set X-Frame-Options "SAMEORIGIN"
 	Header set X-Content-Type-Options nosniff
