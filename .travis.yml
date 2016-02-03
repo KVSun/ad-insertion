@@ -4,10 +4,11 @@ php:
   - '5.6'
   - '7.0'
 env:
-  - MIN_PHP_VERSION="5.5"
-  - AUTOLOAD_DIR="classes"
-  - AUTOLOAD_EXTS=".php"
-  - AUTOLOAD_FUNC="spl_autoload"
+  global:
+    - MIN_PHP_VERSION="5.5"
+    - AUTOLOAD_DIR="classes"
+    - AUTOLOAD_EXTS=".php"
+    - AUTOLOAD_FUNC="spl_autoload"
 script: php unit.php
 notifications:
   webhooks:
