@@ -5,5 +5,5 @@ if (PHP_SAPI !== 'CLI') {
 }
 $timer = \shgysk8zer0\Core\Timer::load('Test');
 
-echo $timer;
+echo "Completed in $timer\n";
 exit(0);
