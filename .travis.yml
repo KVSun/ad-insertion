@@ -3,8 +3,8 @@ php:
   - '5.5'
   - '5.6'
   - '7.0'
- env:
-  - MIN_PHP_VERSION=5.5"
+env:
+  - MIN_PHP_VERSION="5.5"
   - CONFIG_DIR="config"
   - AUTOLOAD_DIR="classes"
   - AUTOLOAD_EXTS=".php"
