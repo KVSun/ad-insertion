@@ -4,7 +4,7 @@ if (version_compare(PHP_VERSION, getenv('MIN_PHP_VERSION'), '<')) {
 	http_response_code(500);
 	exit('PHP version ' . getenv('MIN_PHP_VERSION') . ' or greater is required');
 }
-set_include_path(realpath(getenv('CONFIG_DIR')) . PATH_SEPARATOR . get_include_path());
+set_include_path(realpath(getenv('AUTOLOAD_DIR')) . PATH_SEPARATOR . get_include_path());
 spl_autoload_register(getenv('AUTOLOAD_FUNC'));
 spl_autoload_extensions(getenv('AUTOLOAD_EXTS'));
 if (PHP_SAPI === 'cli') {
