@@ -3,9 +3,8 @@ if (PHP_SAPI !== 'cli') {
 	http_response_code(403);
 	exit();
 }
-$timer = \shgysk8zer0\Core\Timer::load('Test');
+echo get_include_path() . PHP_EOL;
 assert(true, 'This assert should pass.');
 assert(false, 'This assert should fail');
 
-echo "Completed in $timer\n";
 exit(0);
