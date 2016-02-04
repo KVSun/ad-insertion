@@ -1,4 +1,10 @@
+@import "../core-css/viewport.css";
 @import "../normalize/normalize.css";
+@import "../core-css/fonts.css";
+@import "../core-css/class_rules.css";
+@import "../core-css/data-filter.css";
+@import "../core-css/details.css";
+@import "../core-css/dialog.css";
 :root{
 	background-image: linear-gradient(whitesmoke, gainsboro);
 }
