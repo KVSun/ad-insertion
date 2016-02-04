@@ -1,5 +1,5 @@
 Options -Indexes +SymLinksIfOwnerMatch
-DirectoryIndex index.html
+DirectoryIndex index.php
 
 #Configure PHP's autoloader and set include_path, min PHP version
 <IfModule env_module>
