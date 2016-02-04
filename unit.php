@@ -4,6 +4,5 @@ if (PHP_SAPI !== 'cli') {
 	exit();
 }
 require('./autoloader.php');
-echo get_include_path() . PHP_EOL;
-assert(true, 'This assert should pass.');
-assert(false, 'This assert should fail');
+$timer = new \shgysk8zer0\Core\Timer();
+assert('$timer instanceof \shgysk8zer0\Core\Timer', 'Timer class not loaded.');
