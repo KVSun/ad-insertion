@@ -1,5 +1,5 @@
 <?php
-if (PHP_SAPI !== 'CLI') {
+if (PHP_SAPI !== 'cli') {
 	http_response_code(403);
 	exit();
 }
