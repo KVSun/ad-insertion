@@ -1,8 +1,36 @@
 function $(sel) {
 	return Array.from(document.querySelectorAll(sel));
 }
-const TODAY = new InputDate();
+if (! ('HTMLDialogElement' in self)) {
+	document.documentElement.classList.add('no-dialog');
+} else {
+	document.documentElement.classList.add('dialog');
+}
+if (! ('showModal' in Element.prototype)) {
+	Element.prototype.show = function() {
+		this.setAttribute('open', '');
+	}
+	Element.prototype.showModal = function() {
+		let back = document.createElement('div');
+		back.classList.add('backdrop');
+		this.classList.add('modal');
+		if (this.parentElement.lastElementChild === this) {
+			this.parentElement.appendChild(back);
+		} else {
+			this.parentElement.insertBefore(back, this.nextElementSibling);
+		}
+		this.show();
+	}
+	Element.prototype.close = function() {
+		this.classList.remove('modal');
+		this.removeAttribute('open');
+		if (this.nextElementSibling.matches('.backdrop')) {
+			this.nextElementSibling.remove();
+		}
+	}
+}
 self.addEventListener('load', event => {
+	const TODAY = new InputDate();
 	new Notification(document.title, {
 		body: document.querySelector('meta[name="description"]').content,
 		icon: document.querySelector('link[rel="icon"]').href
