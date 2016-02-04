@@ -31,9 +31,44 @@ if (! ('showModal' in Element.prototype)) {
 }
 self.addEventListener('load', event => {
 	const TODAY = new InputDate();
-	new Notification(document.title, {
-		body: document.querySelector('meta[name="description"]').content,
-		icon: document.querySelector('link[rel="icon"]').href
+	$('a').filter(a => a.origin === location.origin).forEach(a => {
+		a.addEventListener('click', click => {
+			if (a.hash.length) {
+				let target = document.getElementById(a.hash.substring(1));
+				if (target.tagName === 'DIALOG') {
+					click.preventDefault();
+					target.showModal();
+				}
+			} else {
+				click.preventDefault();
+				let url = new URL(a.href);
+				let headers = new Headers();
+				fetch(url, {
+					headers,
+					method: 'GET',
+					credentials: 'include'
+				}).then(resp => {
+					if (resp.ok) {
+						let type = resp.headers.get('Content-Type');
+						if (type.startsWith('application/json')) {
+							return resp.json();
+						} else {
+							throw new Error(`Unsupported Content-Type: ${type}`);
+						}
+					} else {
+						throw new Error(`<${resp.url}> ${resp.statusTest}`);
+					}
+				}).then(json => {
+					console.info(json);
+				}).catch(error => {
+					console.error(error);
+					new Notification(`ERROR - ${document.title}`, {
+						body: `"${error.message}\n${error.fileName}:${error.lineNumber}"`,
+						icon: 'images/octicons/svg/bug.svg'
+					});
+				});
+			}
+		});
 	});
 	$('[data-show-modal]').forEach(button => {
 		button.addEventListener('click', event => {
@@ -65,5 +100,10 @@ self.addEventListener('load', event => {
 				console.error(error);
 			});
 		});
+	});
+
+	new Notification(document.title, {
+		body: document.querySelector('meta[name="description"]').content,
+		icon: document.querySelector('link[rel="icon"]').href
 	});
 });
