@@ -1,9 +1,8 @@
 <?php
-if (PHP_SAPI !== 'CLI') {
+if (PHP_SAPI !== 'cli') {
 	http_response_code(403);
 	exit();
 }
-$timer = \shgysk8zer0\Core\Timer::load('Test');
-
-echo "Completed in $timer\n";
-exit(0);
+require('./autoloader.php');
+$timer = new \shgysk8zer0\Core\Timer();
+assert('$timer instanceof \shgysk8zer0\Core\Timer', 'Timer class not loaded.');
