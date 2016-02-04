@@ -13,8 +13,7 @@ if (PHP_SAPI === 'cli') {
 	assert_options(ASSERT_WARNING, false);
 	assert_options(ASSERT_CALLBACK, function($script, $line, $message = null)
 	{
-		echo sprintf('Assert failed on %s:%u with message "%s"', $script, $line, $message);
-		exit(1);
+		echo "Assert failed on {$script}:{$line} with message '${message}'" . PHP_EOL;
 	});
 } else {
 	assert_options(ASSERT_ACTIVE, false);
