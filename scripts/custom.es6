@@ -87,17 +87,37 @@ self.addEventListener('load', event => {
 	$('form').forEach(form => {
 		form.addEventListener('submit', event => {
 			event.preventDefault();
-			fetch(event.target.action, {
-				headers: new Headers(),
-				body: new FormData(event.target),
+			let url = new URL(event.target.action);
+			let headers = new Headers();
+			let body = new FormData(event.target);
+			headers.set('Accept', 'application/json');
+
+			fetch(url, {
+				headers,
+				body,
 				method: event.target.method
 			}).then(resp => {
-				console.log(resp);
-				event.target.reset();
-			}, error => {
-				console.error(error);
+				if (resp.ok) {
+					let type = resp.headers.get('Content-Type');
+					if (type.startsWith('application/json')) {
+						return resp.json();
+					} else {
+						throw new Error(`Unsupported Content-Type: ${type}.`);
+					}
+				} else {
+					throw new Error(`<${resp.url}> ${resp.statusText}`);
+				}
+			}).then(json => {
+				console.info(json);
+				if (confirm('Reset the form?')) {
+					event.target.reset();
+				}
 			}).catch(error => {
 				console.error(error);
+				new Notification(`Error: ${document.title}`, {
+					body: `${error.message}\n${error.fileName}:${error.lineNumber}`,
+					icon: 'images/octicons/svg/bug.svg'
+				});
 			});
 		});
 	});
