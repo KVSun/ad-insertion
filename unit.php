@@ -18,13 +18,8 @@ if (! function_exists('php_check_syntax')) {
 		return $return_var !== false;
 	}
 }
-
-// Do a syntax check on each PHP script in DocumentRoot directory
-foreach (glob('*.php') as $script) {
-	$clean_syntax = php_check_syntax('index.php', $syntax_errors);
-	assert($clean_syntax, $syntax_errors . __FILE__);
-	unset($script, $clean_syntax, $syntax_errors);
-}
+require_once('./test_funcs.php');
+\Tests\lint_scripts_recursive(__DIR__);
 
 // Require the autoloader and check it
 require_once(getenv('AUTOLOAD_SCRIPT'));
