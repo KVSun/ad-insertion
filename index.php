@@ -3,6 +3,7 @@ $console = \shgysk8zer0\Core\Console::getInstance()->asErrorHandler()->asExcepti
 $headers = new \shgysk8zer0\Core\Headers();
 if (in_array('text/html', explode(',', $headers->accept))) {
 	$dom = new \shgysk8zer0\DOM\HTML();
+	$dom->body->class = 'flex column';
 	$dom->head->append('title', 'Ad Insertion');
 	$dom->head->append('link', null, [
 		'rel' => 'icon',
@@ -34,7 +35,7 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 	$main = $dom->body->append('main');
 	$footer = $dom->body->append('footer');
 
-	$header->append('h1', 'KV Sun Ad Insertion');
+	$header->append('h1', 'KV Sun Ad Insertion', ['class' => 'center']);
 	$form = $main->append('form', null, [
 		'name' => 'ad-insertion',
 		'action' => '.',
@@ -233,7 +234,7 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 		'id' => 'ad-insertion[sheets]'
 	]);
 	$charges->append('br');
-	$charges->append('label', null, ['for' => 'ad-insertion[pu]'])->append('abbr', 'P/U', ['title' => 'Puck-Up']);
+	$charges->append('label', null, ['for' => 'ad-insertion[pu]'])->append('abbr', 'P/U', ['title' => 'Pick-Up']);
 	$charges->append('input', null, [
 		'type' => 'text',
 		'name' => 'ad-insertion[pu]',
