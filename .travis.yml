@@ -8,6 +8,7 @@ env:
     - AUTOLOAD_DIR="classes"
     - AUTOLOAD_EXTS=".php"
     - AUTOLOAD_FUNC="spl_autoload"
+    - AUTOLOAD_SCRIPT="./autoloader.php"
 script: php unit.php
 notifications:
   webhooks:
