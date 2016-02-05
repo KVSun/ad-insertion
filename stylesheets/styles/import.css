@@ -75,14 +75,14 @@
 	transition: background-color 3s;
 }
 :root {
-	background-color: black;
+	/*background-color: black;*/
 	color: var(--default-color);
 	text-shadow: var(--shadow);
 	cursor: var(--default-cursor);
 }
 @supports(background-blend-mode: initial) {
 	:root.CSSsupports::before {
-		background-color: var(--primary-color);
+		/*background-color: var(--primary-color);*/
 		background-blend-mode: multiply;
 	}
 }
