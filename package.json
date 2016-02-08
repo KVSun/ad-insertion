@@ -1,0 +1,40 @@
+
+{
+	"name": "ad-insertion",
+	"version": "0.0.1",
+	"description": "A custon PHP application for The Kern Valley Sun.",
+	"keywords": ["Kern Valley Sun", "ads"],
+	"author": {
+		"name": "Chris Zuber",
+		"email": "shgysk8zer0@gmail.com",
+		"url": "https://chriszuber.com"
+	},
+	"contributors": [],
+	"homepage": "http://www.kernvalleysun.com/",
+	"license": "GPL-3.0",
+	"repository" : {
+		"type" : "git",
+		"url" : "https://github.com/KVSun/ad-insertion.git"
+	},
+	"bugs": {
+		"url": "https://github.com/KVSun/ad-insertion/issues"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"eslint": "*",
+		"webpack": "^1.0.0",
+		"babel-core": "*",
+		"babel-preset-es2015": "*",
+		"babel-loader": "^6.2.1"
+	},
+	"babel": {
+		"presets": ["es2015"],
+		"sourceMaps": true,
+		"only": "*.es6",
+		"compact": true,
+		"comments": false
+	},
+	"engines": {
+		"npm": "~3.5.0"
+	}
+}
