@@ -13,12 +13,12 @@ $dom->head->append('link', null, [
 ]);
 $dom->head->append('script', null, [
 	'type' => 'application/javascript',
-	'src' => 'scripts/inputdate.es6',
+	'src' => 'scripts/std-js/prototypes.es6',
 	'defer' => true
 ]);
 $dom->head->append('script', null, [
 	'type' => 'application/javascript',
-	'src' => 'scripts/custom.es6',
+	'src' => 'scripts/custom.js',
 	'defer' => true
 ]);
 $dom->head->append('meta', null, [
