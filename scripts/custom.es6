@@ -24,7 +24,7 @@ if (! ('showModal' in Element.prototype)) {
 	Element.prototype.close = function() {
 		this.classList.remove('modal');
 		this.removeAttribute('open');
-		if (this.nextElementSibling.matches('.backdrop')) {
+		if (this.nextElementSibling && this.nextElementSibling.matches('.backdrop')) {
 			this.nextElementSibling.remove();
 		}
 	}
