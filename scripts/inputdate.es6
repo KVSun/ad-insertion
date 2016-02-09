@@ -1,4 +1,4 @@
-class InputDate extends Date {
+export default class extends Date {
 	toString() {
 		return this.asDateString();
 	}
