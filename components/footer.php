@@ -6,8 +6,21 @@ $readme->append('button', 'x', [
 	'type' => 'button',
 	'data-close-modal' => "#{$readme->id}"
 ]);
+$readme->append('br');
 $readme->importHTML($parsedown->text(file_get_contents('README.md')));
-$footer->append('button', 'Contact', ['data-show-modal' => '#contact-dialog']);
-$footer->append('button', 'Documentation', ['data-show-modal' => "#{$readme->id}"]);
+$footer->append('button', null, [
+	'data-show-modal' => '#contact-dialog'
+])->append('img', null, [
+	'src' => 'images/octicons/svg/person.svg',
+	'alt' => 'View contact info',
+	'height' => 50
+]);;
+$footer->append('button', null, [
+	'data-show-modal' => "#{$readme->id}"
+])->append('img', null, [
+	'src' => 'images/octicons/svg/book.svg',
+	'alt' => 'View README',
+	'height' => 50
+]);
 unset($parsedown, $readme);
 require_once './components/contact-dialog.php';
