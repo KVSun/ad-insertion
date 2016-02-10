@@ -1,10 +1,6 @@
-[issues]: [https://github.com/KVSun/ad-insertion/issues/]
-[dev-email]: [mailto:editor@kvsun.com]
-[gitter]: [https://gitter.im/KVSun/ad-insertion]
-[travis-ci]: [https://travis-ci.org/KVSun/ad-insertion]
 # ad-insertion
-[![Build Status](https://travis-ci.org/KVSun/ad-insertion.svg?branch=master)][travis-ci]
-[![Gitter](https://badges.gitter.im/KVSun/ad-insertion.svg)][gitter]
+[![Build Status](https://travis-ci.org/KVSun/ad-insertion.svg?branch=master)](https://travis-ci.org/KVSun/ad-insertion)
+[![Gitter](https://badges.gitter.im/KVSun/ad-insertion.svg)](https://gitter.im/KVSun/ad-insertion)
 - - -
 ## Contributing
 Write access to the GitHub repository is restricted, so make a fork and clone that. All work should be done on its own branch, named according to the issue number (*e.g. `42` or `bug/23`*). When you are finished with your work, push your feature branch to your fork, preserving branch name (*not to master*), and create a pull request.
@@ -22,9 +18,9 @@ This project uses several submodules, so please be sure to keep everything updat
 - **CSS** - `myth stylesheets/styles/import.css -c stylesheets/styles/styles.css`
 
 ## Contact
-- [Issues][issues]
-- [Chat][gitter]
-- [Email][dev-email]
+- [Issues](https://github.com/KVSun/ad-insertion/issues/)
+- [Chat](https://gitter.im/KVSun/ad-insertion)
+- [Email](mailto:editor@kvsun.com)
 
 ## PHP developer notes
 > This project uses PHP's native [autoloader](https://secure.php.net/manual/en/function.spl-autoload.php), which is configured via `.travis.yml` and `.htaccess` environment variables. Apache will automatically include the autoloader script using `php_value auto_prepend_file`, but since this uses relative paths, it will only work correctly in the project's root directory. To use in other directories, place a `.htacces` and set the relative path accordingly.
