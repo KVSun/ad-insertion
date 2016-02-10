@@ -27,10 +27,12 @@ This project uses several submodules, so please be sure to keep everything updat
 
 ## JavaScript developer notes
 > Due to Content-Security-Policy, use of `eval` and inline scripts are **prohibited** Further, this project uses ECMAScript 2015  [modules](http://exploringjs.com/es6/ch_modules.html), so be sure to familiarize yourself with the syntax.
+
 ![JavaScript sample](https://i.imgur.com/Ac0fKZu.png)
 
 ## CSS developer notes
 > Like in the above, one of the goals of this project is to keep things working natively, which means standardized CSS and JavaScript. Although the features may me new, `import` and `export` in JavaScript, and `@import` and `--var-name: value` are official standards. In the case of CSS, browser support does exist, and so this project will use `@import` and CSS variables in favor of SASS or LESS.
+
 ![CSS sample](https://i.imgur.com/j4sC5qv.png)
 
 ## Git submodules
