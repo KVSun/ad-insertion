@@ -9,6 +9,7 @@ $readme->append('button', 'x', [
 $readme->append('br');
 $readme->importHTML($parsedown->text(file_get_contents('README.md')));
 $footer->append('button', null, [
+	'title' => 'Contact info',
 	'data-show-modal' => '#contact-dialog'
 ])->append('img', null, [
 	'src' => 'images/octicons/svg/person.svg',
@@ -16,6 +17,7 @@ $footer->append('button', null, [
 	'height' => 50
 ]);;
 $footer->append('button', null, [
+	'title' => 'View README/documentation',
 	'data-show-modal' => "#{$readme->id}"
 ])->append('img', null, [
 	'src' => 'images/octicons/svg/book.svg',
