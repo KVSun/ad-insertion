@@ -32,6 +32,7 @@ This project uses several submodules, so please be sure to keep everything updat
 
 ## JavaScript developer notes
 > Due to Content-Security-Policy, use of `eval` and inline scripts are **prohibited** Further, this project uses ECMAScript 2015  [modules](http://www.2ality.com/2014/09/es6-modules-final.html), so be sure to familiarize yourself with the syntax.
+![Code sample](https://i.imgur.com/7YLOJ8n.png)
 
 ## Git submodules
 - [shgysk8zer0/core_api](https://github.com/shgysk8zer0/core_api/)
