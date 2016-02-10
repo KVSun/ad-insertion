@@ -26,7 +26,7 @@ This project uses several submodules, so please be sure to keep everything updat
 > This project uses PHP's native [autoloader](https://secure.php.net/manual/en/function.spl-autoload.php), which is configured via `.travis.yml` and `.htaccess` environment variables. Apache will automatically include the autoloader script using `php_value auto_prepend_file`, but since this uses relative paths, it will only work correctly in the project's root directory. To use in other directories, place a `.htacces` and set the relative path accordingly.
 
 ## JavaScript developer notes
-> Due to Content-Security-Policy, use of `eval` and inline scripts are **prohibited** Further, this project uses ECMAScript 2015  [modules](http://www.2ality.com/2014/09/es6-modules-final.html), so be sure to familiarize yourself with the syntax.
+> Due to Content-Security-Policy, use of `eval` and inline scripts are **prohibited** Further, this project uses ECMAScript 2015  [modules](http://exploringjs.com/es6/ch_modules.html), so be sure to familiarize yourself with the syntax.
 ![JavaScript sample](https://i.imgur.com/Ac0fKZu.png)
 
 ## CSS developer notes
