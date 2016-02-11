@@ -8,8 +8,13 @@ $dom->head->append('link', null, [
 ]);
 $dom->head->append('link', null, [
 	'rel' => 'stylesheet',
-	'href' => 'stylesheets/styles/import.css',
+	'href' => 'stylesheets/styles/styles.css',
 	'media' => 'all'
+]);
+$dom->head->append('link', null, [
+	'rel' => 'prefetch',
+	'href' => 'images/icons.svg',
+	'type' => 'image/svg+xml'
 ]);
 $dom->head->append('script', null, [
 	'type' => 'application/javascript',
