@@ -11,6 +11,7 @@ env:
     - AUTOLOAD_SCRIPT="./autoloader.php"
 script: php unit.php
 notifications:
+  slack: kvsun:7psPgb0dg4raXU22LunLomH3
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/9d085552b0f8d863b23c
