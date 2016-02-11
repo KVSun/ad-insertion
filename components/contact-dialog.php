@@ -8,39 +8,31 @@ $dialog->append('br');
 $dialog->append('a', null, [
 	'href' => 'mailto:editor@kvsun.com',
 	'title' => 'Email'
-])->append('img', null, [
-	'src' => 'images/octicons/svg/mail-read.svg',
-	'alt' => 'Email',
+])->append('svg', null, [
 	'width' => 60,
 	'height' => 60
-]);
+])->append('use', null, ['xlink:href' => 'images/icons.svg#mail-read']);
 $dialog->append('a', null, [
 	'href' => 'https://gitter.im/KVSun/ad-insertion',
 	'target' => '_blank',
 	'title' => 'Chat on Gitter'
-])->append('img', null, [
-	'src' => 'images/octicons/svg/comment.svg',
-	'alt' => 'Gitter',
+])->append('svg', null, [
 	'width' => 60,
 	'height' => 60
-]);
+])->append('use', null, ['xlink:href' => 'images/icons.svg#comment']);
 $dialog->append('a', null, [
 	'href' => 'https://github.com/KVSun/ad-insertion/',
 	'target' => '_blank',
 	'title' => 'GitHub'
-])->append('img', null, [
-	'src' => 'images/octicons/svg/mark-github.svg',
-	'alt' => 'GitHub',
+])->append('svg', null, [
 	'width' => 60,
 	'height' => 60
-]);
+])->append('use', null, ['xlink:href' => 'images/icons.svg#mark-github']);
 $dialog->append('a', null, [
 	'href' => 'https://github.com/KVSun/ad-insertion/issues/new/',
 	'target' => '_blank',
 	'title' => 'Open Issue'
-])->append('img', null, [
-	'src' => 'images/octicons/svg/issue-opened.svg',
-	'alt' => 'Open Issue',
+])->append('svg', null, [
 	'width' => 60,
 	'height' => 60
-]);
+])->append('use', null, ['xlink:href' => 'images/icons.svg#issue-opened']);
