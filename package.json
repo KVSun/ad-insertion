@@ -1,4 +1,3 @@
-
 {
 	"name": "ad-insertion",
 	"version": "0.0.1",
@@ -19,13 +18,25 @@
 	"bugs": {
 		"url": "https://github.com/KVSun/ad-insertion/issues"
 	},
+	"engines": {
+		"npm": "~3.5.0"
+	},
 	"dependencies": {},
 	"devDependencies": {
 		"eslint": "*",
 		"webpack": "^1.0.0",
 		"babel-core": "*",
 		"babel-preset-es2015": "*",
-		"babel-loader": "^6.2.1"
+		"babel-loader": "^6.2.1",
+		"svgo": "*",
+		"svg-sprite-generator": "*"
+	},
+	"scripts": {
+		"build:css": "myth stylesheets/styles/import.css -c stylesheets/styles/styles.css",
+		"build:js": "webpack",
+		"build:icons": "svg-sprite-generate -c icons.csv -o images/icons.svg",
+		"build:all": "npm run build:css &amp;&amp; npm run build:js",
+		"update": "git submodule update --init --recursive"
 	},
 	"babel": {
 		"presets": ["es2015"],
@@ -33,8 +44,5 @@
 		"only": "*.es6",
 		"compact": true,
 		"comments": false
-	},
-	"engines": {
-		"npm": "~3.5.0"
 	}
 }
