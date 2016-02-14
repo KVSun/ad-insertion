@@ -1,0 +1,9 @@
+:root {
+	background-image: var(--main-bg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	color: var(--default-color);
+	text-shadow: var(--shadow);
+	cursor: var(--default-cursor);
+}

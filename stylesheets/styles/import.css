@@ -2,6 +2,7 @@
 @import url(../core-css/viewport.css);
 @import url(../normalize/normalize.css);
 @import url(viewport.css);
+@import url(root.css);
 @import url(../core-css/fonts.css);
 @import url(../core-css/animations.css) screen;
 @import url(../core-css/details.css);
@@ -11,12 +12,14 @@
 @import url(../core-css/links.css);
 @import url(../core-css/misc.css);
 @import url(../core-css/data-filter.css);
+@import url(columns.css);
+@import url(icons.css);
 :root {
 	/*================= Set color vars here =================*/
 	--default-color: #333;
-	--alt-color: rgb(41, 41, 41);
-	--primary-color: rgb(237, 24, 24);
-	--highlight-color: rgb(129, 23, 23);
+	--alt-color: #f9f9f9;
+	--primary-color: rgb(24, 117, 237);
+	--highlight-color: rgb(23, 43, 129);
 	--link-color: hsl(209, 62%, 45%);
 	--visited-color: #551A8B;
 	--border-color: rgb(45, 45, 45);
@@ -50,46 +53,4 @@
 	/*================== Set cursors here ==================*/
 	--default-cursor: auto;
 	--pointer:  pointer;
-	/*============= Various sizes and positions =============*/
-	--main-width: 90%;
-	--article-width: 67%;
-	--sidebar-width: calc(97% - var(--article-width));
-	--article-position: 2;
-	--sidebar-position: 1;
-	/*This is the max z-index value. Others can use calc(var(--z-max) - n)*/
-	--z-max: 100;
-}
-:root::before {
-	content: '';
-	display: block;
-	position: fixed;
-	width: 100%;
-	height: 100vh;
-	z-index: -1;
-	background-image: var(--main-bg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	will-change: transform;
-	transition: background-color 3s;
-}
-:root {
-	/*background-color: black;*/
-	color: var(--default-color);
-	text-shadow: var(--shadow);
-	cursor: var(--default-cursor);
-}
-@supports(background-blend-mode: initial) {
-	:root.CSSsupports::before {
-		/*background-color: var(--primary-color);*/
-		background-blend-mode: multiply;
-	}
-}
-@supports((display: flex) or (display: -webkit-flex) or (display: -ms-flex)) {
-	body {
-		justify-content: center;
-		text-rendering: optimizeSpeed;
-		scroll-behavior: smooth;
-	}
 }
