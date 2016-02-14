@@ -35,7 +35,7 @@
 		"build:css": "myth stylesheets/styles/import.css -c stylesheets/styles/styles.css",
 		"build:js": "webpack",
 		"build:icons": "php svgsprites.php",
-		"build:all": "npm run build:css &amp;&amp; npm run build:js",
+		"build:all": "npm run build:css && npm run build:js && npm run build:icons",
 		"update": "git submodule update --init --recursive"
 	},
 	"babel": {
