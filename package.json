@@ -35,7 +35,8 @@
 		"build:js": "webpack",
 		"build:icons": "php svgsprites.php",
 		"build:all": "npm run build:css && npm run build:js && npm run build:icons",
-		"update": "git submodule update --init --recursive"
+		"update": "git submodule update --init --recursive",
+		"test": "php unit.php"
 	},
 	"babel": {
 		"presets": ["es2015"],
