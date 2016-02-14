@@ -27,9 +27,7 @@
 		"webpack": "^1.0.0",
 		"babel-core": "*",
 		"babel-preset-es2015": "*",
-		"babel-loader": "^6.2.1",
-		"svgo": "*",
-		"svg-sprite-generator": "*"
+		"babel-loader": "^6.2.1"
 	},
 	"scripts": {
 		"build:css": "myth stylesheets/styles/import.css -c stylesheets/styles/styles.css",
