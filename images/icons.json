@@ -1,8 +1,8 @@
-[
-	"images/octicons/svg/person.svg",
-	"images/octicons/svg/book.svg",
-	"images/octicons/svg/mail-read.svg",
-	"images/octicons/svg/comment.svg",
-	"images/octicons/svg/mark-github.svg",
-	"images/octicons/svg/issue-opened.svg"
-]
+{
+	"person": "images/octicons/svg/person.svg",
+	"book": "images/octicons/svg/book.svg",
+	"mail-read": "images/octicons/svg/mail-read.svg",
+	"comment": "images/octicons/svg/comment.svg",
+	"mark-github": "images/octicons/svg/mark-github.svg",
+	"issue-opened": "images/octicons/svg/issue-opened.svg"
+}
