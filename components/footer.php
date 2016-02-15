@@ -2,9 +2,9 @@
 $parsedown = new \Parsedown\Parsedown();
 $footer = $dom->body->append('footer');
 $readme = $footer->append('dialog', null, ['id' => 'README-dialog']);
-$readme->append('button', 'x', [
+$readme->append('button', null, [
 	'type' => 'button',
-	'data-close-modal' => "#{$readme->id}"
+	'data-close' => "#{$readme->id}"
 ]);
 $readme->append('br');
 $readme->importHTML($parsedown->text(file_get_contents('README.md')));

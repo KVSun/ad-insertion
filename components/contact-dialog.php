@@ -1,8 +1,8 @@
 <?php
 $dialog = $footer->append('dialog', null, ['id' => 'contact-dialog']);
-$dialog->append('button', 'x', [
+$dialog->append('button', null, [
 	'type' => 'button',
-	'data-close-modal' => '#contact-dialog'
+	'data-close' => '#contact-dialog'
 ]);
 $dialog->append('br');
 $dialog->append('a', null, [

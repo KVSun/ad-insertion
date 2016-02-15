@@ -1,0 +1,6 @@
+svg > use {
+	fill: currentColor;
+}
+button, [role="button"] {
+	color: var(--alt-color);
+}
