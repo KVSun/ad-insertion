@@ -2,6 +2,7 @@ import {default as $} from './std-js/zq.es6';
 import {default as handleJSON} from './std-js/json_response.es6';
 import {reportError, parseResponse} from './std-js/functions.es6';
 import {default as supports} from './std-js/support_test.es6';
+
 export const watcher = {
 	childList: function() {
 		$(this.addedNodes).bootstrap();
@@ -9,7 +10,7 @@ export const watcher = {
 	attributes: function() {
 		switch (this.attributeName) {
 			case 'contextmenu':
-				var menu = this.target.getAttribute('contextmenu');
+				let menu = this.target.getAttribute('contextmenu');
 				if (this.oldValue !== '') {
 					$(`menu#${this.oldValue}`).remove();
 				}
@@ -36,37 +37,6 @@ export const watcher = {
 				}
 				break;
 
-			case 'data-import':
-				if ('import' in this.target.dataset) {
-					this.target.HTMLimport();
-				}
-				break;
-
-			case 'data-request':
-				if (this.oldValue !== '') {
-					this.target.addEventListener('click', function() {
-						if (!('confirm' in this.dataset) || confirm(this.dataset.confirm)) {
-							let url = new URL(this.dataset.url, document.baseURI);
-							let headers = new Headers();
-							let body = new URLSearchParams(this.dataset.request);
-							headers.set('Accept', 'application/json');
-							if ('prompt' in this.dataset) {
-								body.set('prompt_value', prompt(this.dataset.prompt));
-							}
-							fetch(url, {
-								method: 'POST',
-								headers,
-								body
-							}).then(parseResponse).then(handleJSON).catch(reportError);
-						}
-					});
-				}
-				break;
-
-			case 'data-dropzone':
-				document.querySelector(this.target.dataset.dropzone).DnD(this.target);
-				break;
-
 			default:
 				console.error(`Unhandled attribute in watch: "${this.attributeName}"`);
 		}
@@ -81,10 +51,7 @@ export const config = [
 export const attributeTree = [
 	'contextmenu',
 	'list',
-	'open',
-	'data-request',
-	'data-dropzone',
-	'data-import'
+	'open'
 ];
 
 export function bootstrap() {
@@ -97,17 +64,14 @@ export function bootstrap() {
 			node.query('details > summary').forEach(summary => {
 				summary.addEventListener('click', click => {
 					if (summary.parentElement.hasAttribute('open')) {
-						summary.parentElement.removeAttribute('open');
+						summary.parentElement.close();
 					} else {
-						summary.parentElement.setAttribute('open', '');
+						summary.parentElement.open();
 					}
 				});
 			});
 		}
 		if (supports('menuitem')) {
-			/*
-			 * This should be done via GET
-			 */
 			node.query('[contextmenu]').forEach(el => {
 				let menu = el.getAttribute('contextmenu');
 				if (menu && menu !== '') {
@@ -118,7 +82,7 @@ export function bootstrap() {
 						body.set('load_menu', menu.replace(/\_menu$/, ''));
 						headers.set('Accept', 'application/json');
 						fetch(url, {
-							method: 'POST',
+							method: 'GET',
 							headers,
 							body,
 							credentials: 'include'
@@ -148,7 +112,7 @@ export function bootstrap() {
 			node.query('picture').forEach(function(picture) {
 				if ('matchMedia' in window) {
 					let sources = picture.querySelectorAll('source[media][srcset]');
-					for (var n = 0; n < sources.length; n++) {
+					for (let n = 0; n < sources.length; n++) {
 						if (matchMedia(sources[n].getAttribute('media')).matches) {
 							picture.getElementsByTagName('img')[0].src = sources[n].getAttribute('srcset');
 							break;
@@ -174,7 +138,7 @@ export function bootstrap() {
 				fetch(url, {
 					method: 'GET',
 					headers
-				}).then(parseResponse).then(handleJSON).then(function(resp) {
+				}).then(parseResponse).then(handleJSON).then(resp => {
 					history.pushState({}, document.title, a.href);
 					return resp;
 				}).catch(reportError);
@@ -197,8 +161,7 @@ export function bootstrap() {
 							headers,
 							body,
 							credentials: 'include'
-						}
-					).then(parseResponse).then(handleJSON).catch(reportError);
+					}).then(parseResponse).then(handleJSON).catch(reportError);
 				}
 			});
 		});
@@ -240,9 +203,9 @@ export function bootstrap() {
 				document.querySelector(`[data-must-match="${change.target.name}"]`).pattern = new RegExp(change.target.value).escape();
 			});
 		});
-		node.query('[data-dropzone]') .forEach(function (el) {
-			document.querySelector(el.dataset.dropzone).DnD(el);
-		});
+		// node.query('[data-dropzone]') .forEach(function (el) {
+		// 	document.querySelector(el.dataset.dropzone).DnD(el);
+		// });
 		node.query('input[data-equal-input]').forEach(input => {
 			input.addEventListener('input', input => {
 				$(`input[data-equal-input="${input.target.dataset.equalInput}"]`).each(other => {
@@ -253,29 +216,29 @@ export function bootstrap() {
 			});
 		});
 		// node.query('menu[type="context"]').forEach(WYSIWYG);
-		node.query('[data-request]').forEach(el => {
-			el.addEventListener('click', click => {
-				click.preventDefault();
-				if (!(el.dataset.hasOwnProperty('confirm')) || confirm(el.dataset.confirm)) {
-					let url = new URL(el.dataset.url || document.baseURI);
-					let headers = new Headers();
-					let body = new URLSearchParams(el.dataset.request);
-					headers.set('Accept', 'application/json');
-					if ('prompt' in el.dataset) {
-						body.set('prompt_value', prompt(el.dataset.prompt));
-					}
-					fetch(url, {
-						method: 'POST',
-						headers,
-						body,
-						credentials: 'include'
-					}).then(parseResponse).then(handleJSON).catch(reportError);
-				}
-			});
-		});
-		node.query('[data-dropzone]').forEach(finput => {
-			document.querySelector(finput.dataset.dropzone).DnD(finput);
-		});
+		// node.query('[data-request]').forEach(el => {
+		// 	el.addEventListener('click', click => {
+		// 		click.preventDefault();
+		// 		if (!(el.dataset.hasOwnProperty('confirm')) || confirm(el.dataset.confirm)) {
+		// 			let url = new URL(el.dataset.url || document.baseURI);
+		// 			let headers = new Headers();
+		// 			let body = new URLSearchParams(el.dataset.request);
+		// 			headers.set('Accept', 'application/json');
+		// 			if ('prompt' in el.dataset) {
+		// 				body.set('prompt_value', prompt(el.dataset.prompt));
+		// 			}
+		// 			fetch(url, {
+		// 				method: 'POST',
+		// 				headers,
+		// 				body,
+		// 				credentials: 'include'
+		// 			}).then(parseResponse).then(handleJSON).catch(reportError);
+		// 		}
+		// 	});
+		// });
+		// node.query('[data-dropzone]').forEach(finput => {
+		// 	document.querySelector(finput.dataset.dropzone).DnD(finput);
+		// });
 		node.query('[data-fullscreen]').forEach(el => {
 			el.addEventListener('click', click => {
 				if (fullScreen) {
