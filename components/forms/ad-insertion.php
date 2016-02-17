@@ -1,5 +1,5 @@
 <?php
-$form = $main->append('form', null, [
+$form = $dom->body->getElementsByTagName('main')->item(0)->append('form', null, [
 	'name' => 'ad-insertion',
 	'action' => '.',
 	'method' => 'POST'
