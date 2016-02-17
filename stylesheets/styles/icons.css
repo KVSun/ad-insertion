@@ -2,5 +2,6 @@ svg > use {
 	fill: currentColor;
 }
 button, [role="button"] {
+	display: inline-block;
 	color: var(--alt-color);
 }
