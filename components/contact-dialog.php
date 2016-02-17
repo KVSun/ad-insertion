@@ -1,5 +1,5 @@
 <?php
-$dialog = $footer->append('dialog', null, ['id' => 'contact-dialog']);
+$dialog = $dom->body->getElementsByTagName('footer')->item(0)->append('dialog', null, ['id' => 'contact-dialog']);
 $dialog->append('button', null, [
 	'type' => 'button',
 	'data-close' => '#contact-dialog'
