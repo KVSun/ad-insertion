@@ -3,9 +3,47 @@ import {default as handleJSON} from './std-js/json_response.es6';
 import {reportError, parseResponse} from './std-js/functions.es6';
 import {default as supports} from './std-js/support_test.es6';
 
+function closeOnOutsideClick(click) {
+	if (! click.target.matches(`dialog`)) {
+		$('dialog[open]').each(dialog => {
+			if ($(dialog.childNodes).some(node =>
+				node.dataset.hasOwnProperty('delete')
+				&& node.dataset.delete === `#${dialog.id}`
+			)) {
+				dialog.remove();
+			} else {
+				dialog.close();
+			}
+			document.body.removeEventListener('click', closeOnOutsideClick);
+			document.body.removeEventListener('keypress', closeOnEscapeKey);
+		});
+	}
+}
+function closeOnEscapeKey(keypress) {
+	if (keypress.key === 'Escape') {
+		$('dialog[open]').each(dialog => {
+			if ($(dialog.childNodes).some(node =>
+				node.dataset.hasOwnProperty('delete')
+				&& node.dataset.delete === `#${dialog.id}`
+			)) {
+				dialog.remove();
+			} else {
+				dialog.close();
+			}
+			document.body.removeEventListener('click', closeOnOutsideClick);
+			document.body.removeEventListener('keypress', closeOnEscapeKey);
+		});
+	}
+}
 export const watcher = {
 	childList: function() {
 		$(this.addedNodes).bootstrap();
+	},
+	removedNodes: function() {
+		if (Array.from(this.removedNodes).some(node => node.tagName === 'DIALOG')) {
+			document.body.removeEventListener('click', closeOnOutsideClick);
+			document.body.removeEventListener('keypress', closeOnEscapeKey);
+		}
 	},
 	attributes: function() {
 		switch (this.attributeName) {
@@ -29,11 +67,15 @@ export const watcher = {
 				break;
 
 			case 'open':
-				if (
-					this.target.hasAttribute('open')
-					&& (this.target.offsetTop + this.target.offsetHeight < window.scrollY)
-				) {
-					this.target.scrollIntoView();
+				if (this.target.tagName === 'DIALOG') {
+					if (this.target.hasAttribute('open')) {
+						setTimeout(() => {
+							$(document.body).click(closeOnOutsideClick).keypress(closeOnEscapeKey);
+						}, 500);
+					} else {
+						document.body.removeEventListener('click', closeOnOutsideClick);
+						document.body.removeEventListener('keypress', closeOnEscapeKey);
+					}
 				}
 				break;
 
