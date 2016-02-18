@@ -7,7 +7,9 @@
 - [Icons](#icons)
 - [Git Submodules used](#git-submodules)
 - [NPM Modules / Dev dependencies](#dev-dependencies)
+
 - - -
+
 ## General
 Write access to the GitHub repository is restricted, so make a fork and clone that. All work should be done on its own branch, named according to the issue number (*e.g. `42` or `bug/23`*). When you are finished with your work, push your feature branch to your fork, preserving branch name (*not to master*), and create a pull request.
 
