@@ -6,6 +6,7 @@ Options -Indexes +SymLinksIfOwnerMatch
 	<IfModule env_module>
 		SetEnv MIN_PHP_VERSION 5.5
 		SetEnv CONFIG_DIR config
+		SetEnv COMPONENTS_DIR components
 		SetEnv AUTOLOAD_DIR classes
 		SetEnv AUTOLOAD_EXTS .php
 		SetEnv AUTOLOAD_FUNC spl_autoload

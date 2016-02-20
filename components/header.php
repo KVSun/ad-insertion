@@ -1,5 +1,5 @@
 <?php
-$header = $dom->body->append('header');
+$header = \shgysk8zer0\DOM\HTML::getInstance()->createElement('header');
 $header->append('h1', 'KV Sun Ad Insertion', [
 	'class' => 'center'
 ])->append('img', null, [
@@ -8,3 +8,4 @@ $header->append('h1', 'KV Sun Ad Insertion', [
 	'width' => 266,
 	'height' => 90
 ]);
+return $header;

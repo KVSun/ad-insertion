@@ -1,9 +1,8 @@
 <?php
-$form = $dom->body->getElementsByTagName('main')->item(0)->append('form', null, [
-	'name' => 'ad-insertion',
-	'action' => '.',
-	'method' => 'POST'
-]);
+$form = \shgysk8zer0\DOM\HTML::getinstance()->createElement('form');
+$form->name = 'ad-insertion';
+$form->action = '.';
+$form->method = 'POST';
 $section = $form->append('fieldset', null, ['form' => 'ad-insertion']);
 $section->append('legend', 'Section');
 $section->append('label', 'Date: ', ['for' => 'ad-insertion[date]']);
@@ -225,3 +224,4 @@ unset($info);
 $form->append('button', 'Submit', ['type' => 'submit']);
 $form->append('button', 'Reset', ['type' => 'reset']);
 $form->append('hr');
+return $form;

@@ -1,5 +1,6 @@
 <?php
-$dialog = $dom->body->getElementsByTagName('footer')->item(0)->append('dialog', null, ['id' => 'contact-dialog']);
+$dialog = \shgysk8zer0\DOM\HTML::getInstance()->createElement('dialog');
+$dialog->id = 'contact-dialog';
 $dialog->append('button', null, [
 	'type' => 'button',
 	'data-close' => '#contact-dialog'
@@ -36,3 +37,4 @@ $dialog->append('a', null, [
 	'width' => 60,
 	'height' => 60
 ])->append('use', null, ['xlink:href' => 'images/icons.svg#issue-opened']);
+return $dialog;
