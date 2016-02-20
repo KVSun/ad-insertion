@@ -1,4 +1,6 @@
 <?php
+$dom = \shgysk8zer0\DOM\HTML::getInstance();
+$head = $dom->createDocumentFragment();
 $dom->head->append('title', 'Ad Insertion');
 $dom->head->append('link', null, [
 	'rel' => 'icon',

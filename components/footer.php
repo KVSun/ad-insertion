@@ -1,5 +1,5 @@
 <?php
-$footer = $dom->body->append('footer');
+$footer = \shgysk8zer0\DOM\HTML::getInstance()->createElement('footer');
 $footer->append('a', null, [
 	'title' => 'View README/documentation',
 	'href' => './?load=readme',
@@ -21,6 +21,6 @@ $footer->append('button', null, [
 	'xlink:href' => 'images/icons.svg#person'
 ]);
 
-\KVSun\load('contact-dialog');
+$footer('contact-dialog');
 return $footer;
 // require_once './components/contact-dialog.php';
