@@ -1,5 +1,4 @@
 <?php
-require_once './functions.php';
 \shgysk8zer0\Core\Console::getInstance()->asErrorHandler()->asExceptionHandler();
 \shgysk8zer0\DOM\HTMLElement::$import_path = realpath(getenv('COMPONENTS_DIR'));
 $headers = \shgysk8zer0\Core\Headers::getInstance();
