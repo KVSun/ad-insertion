@@ -6,7 +6,7 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 	$dom = \shgysk8zer0\DOM\HTML::getInstance();
 	$dom->body->class = 'flex column';
 	call_user_func($dom->head, 'head');
-	call_user_func($dom->body, 'header', 'main', 'forms/ad-insertion', 'footer');
+	call_user_func($dom->body, 'header', 'main', 'footer');
 	exit($dom);
 } elseif ($headers->accept === 'application/json' and !empty($_REQUEST)) {
 	$resp = \shgysk8zer0\Core\JSON_Response::load();
