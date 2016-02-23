@@ -3,6 +3,31 @@ import {default as handleJSON} from './std-js/json_response.es6';
 import {reportError, parseResponse} from './std-js/functions.es6';
 import {default as supports} from './std-js/support_test.es6';
 
+function sameoriginFrom(form) {
+	return new URL(form.action).origin === location.origin;
+}
+
+function submitForm(form) {
+	submit.preventDefault();
+	let els = Array.from(form.querySelectorAll('fieldset, button'));
+	els.forEach(el => el.disabled = true);
+	if (!('confirm' in submit.target.dataset) || confirm(submit.target.dataset.confirm)) {
+		let body = new FormData(submit.target);
+		let headers = new Headers();
+		let url = new URL(submit.target.action, location.origin);
+		// body.append('nonce', sessionStorage.getItem('nonce'));
+		body.append('form', submit.target.name);
+		headers.set('Accept', 'application/json');
+		fetch(url, {
+				method: submit.target.method || 'POST',
+				headers,
+				body,
+				credentials: 'include'
+		}).then(parseResponse).then(handleJSON).catch(reportError);
+		els.forEach(el => el.disabled = false);
+	}
+}
+
 function closeOnOutsideClick(click) {
 	if (! click.target.matches(`dialog`)) {
 		$('dialog[open]').each(dialog => {
@@ -140,7 +165,7 @@ export function bootstrap() {
 					let headers = new Headers();
 					let body = new URLSearchParams();
 					headers.set('Accept', 'application/json');
-					body.set('datalist', list.getAttribute('list'))
+					body.set('datalist', list.getAttribute('list'));
 					fetch(url, {
 						method: 'POST',
 						headers,
@@ -186,27 +211,7 @@ export function bootstrap() {
 				}).catch(reportError);
 			});
 		});
-		node.query('form[name]').filter(
-			form => new URL(form.action).origin === location.origin
-		).forEach(form => {
-			form.addEventListener('submit', submit => {
-				submit.preventDefault();
-				if (!('confirm' in submit.target.dataset) || confirm(submit.target.dataset.confirm)) {
-					let body = new FormData(submit.target);
-					let headers = new Headers();
-					let url = new URL(submit.target.action, location.origin);
-					// body.append('nonce', sessionStorage.getItem('nonce'));
-					body.append('form', submit.target.name);
-					headers.set('Accept', 'application/json');
-					fetch(url, {
-							method: submit.target.method || 'POST',
-							headers,
-							body,
-							credentials: 'include'
-					}).then(parseResponse).then(handleJSON).catch(reportError);
-				}
-			});
-		});
+		node.query('form[name]').filter(sameoriginFrom).forEach(submitForm);
 		node.query('[data-show]').forEach(el => {
 			el.addEventListener('click', click => {
 				document.querySelector(el.dataset.show).show();
