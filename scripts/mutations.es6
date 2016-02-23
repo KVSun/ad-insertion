@@ -28,6 +28,66 @@ function submitForm(submit) {
 	}
 }
 
+function getDatalist(list) {
+	if (!$('#' + list.getAttribute('list')).found) {
+		let url = new URL(document.baseURI);
+		let headers = new Headers();
+		let body = new URLSearchParams();
+		headers.set('Accept', 'application/json');
+		body.set('datalist', list.getAttribute('list'));
+		fetch(url, {
+			method: 'POST',
+			headers,
+			body,
+			credentials: 'include'
+		}).then(parseResponse).then(handleJSON).catch(reportError);
+	}
+}
+
+function getContextMenu(el) {
+	let menu = el.getAttribute('contextmenu');
+	if (menu && menu !== '') {
+		if (!$(`menu#${menu}`).found) {
+			let headers = new Headers();
+			let url = new URL(document.baseURI);
+			let body = new URLSearchParams();
+			body.set('load_menu', menu.replace(/\_menu$/, ''));
+			headers.set('Accept', 'application/json');
+			fetch(url, {
+				method: 'GET',
+				headers,
+				body,
+				credentials: 'include'
+			}).then(parseResponse).then(handleJSON).catch(reportError);
+		}
+	}
+}
+
+function getLink(click) {
+	click.preventDefault();
+	let url = new URL(this.href, location.origin);
+	let headers = new Headers();
+	headers.set('Accept', 'application/json');
+	if (typeof ga === 'function') {
+		ga('send', 'pageview', a.href);
+	}
+	fetch(url, {
+		method: 'GET',
+		headers
+	}).then(parseResponse).then(handleJSON).then(resp => {
+		history.pushState({}, document.title, this.href);
+		return resp;
+	}).catch(reportError);
+}
+
+function toggleCheckboxes(click) {
+	let fieldset = this.closest('fieldset');
+	let checkboxes = Array.from(fieldset.querySelectorAll('input[type="checkbox"]'));
+	checkboxes.forEach(checkbox => {
+		checkbox.checked = !checkbox.checked;
+	});
+}
+
 function closeOnOutsideClick(click) {
 	if (! click.target.matches(`dialog`)) {
 		$('dialog[open]').each(dialog => {
@@ -139,41 +199,10 @@ export function bootstrap() {
 			});
 		}
 		if (supports('menuitem')) {
-			node.query('[contextmenu]').forEach(el => {
-				let menu = el.getAttribute('contextmenu');
-				if (menu && menu !== '') {
-					if (!$(`menu#${menu}`).found) {
-						let headers = new Headers();
-						let url = new URL(document.baseURI);
-						let body = new URLSearchParams();
-						body.set('load_menu', menu.replace(/\_menu$/, ''));
-						headers.set('Accept', 'application/json');
-						fetch(url, {
-							method: 'GET',
-							headers,
-							body,
-							credentials: 'include'
-						}).then(parseResponse).then(handleJSON).catch(reportError);
-					}
-				}
-			});
+			node.query('[contextmenu]').forEach(getContextMenu);
 		}
 		if (supports('datalist')) {
-			node.query('[list]').forEach(list => {
-				if (!$('#' + list.getAttribute('list')).found) {
-					let url = new URL(document.baseURI);
-					let headers = new Headers();
-					let body = new URLSearchParams();
-					headers.set('Accept', 'application/json');
-					body.set('datalist', list.getAttribute('list'));
-					fetch(url, {
-						method: 'POST',
-						headers,
-						body,
-						credentials: 'include'
-					}).then(parseResponse).then(handleJSON).catch(reportError);
-				}
-			});
+			node.query('[list]').forEach(getDatalist);
 		}
 		if (!supports('picture')) {
 			node.query('picture').forEach(function(picture) {
@@ -194,22 +223,7 @@ export function bootstrap() {
 		node.query(
 			'a[href]:not([target="_blank"]):not([download]):not([href*="\#"])'
 		).filter(link => link.origin === location.origin).forEach(a => {
-			a.addEventListener('click', click => {
-				click.preventDefault();
-				let url = new URL(a.href, location.origin);
-				let headers = new Headers();
-				headers.set('Accept', 'application/json');
-				if (typeof ga === 'function') {
-					ga('send', 'pageview', a.href);
-				}
-				fetch(url, {
-					method: 'GET',
-					headers
-				}).then(parseResponse).then(handleJSON).then(resp => {
-					history.pushState({}, document.title, a.href);
-					return resp;
-				}).catch(reportError);
-			});
+			a.addEventListener('click', getLink);
 		});
 		node.query('form[name]').filter(sameoriginFrom).forEach(form => {
 			$(form).submit(submitForm);
@@ -238,13 +252,7 @@ export function bootstrap() {
 			});
 		});
 		node.query('fieldset button[type="button"].toggle').forEach(toggle => {
-			toggle.addEventListener('click', click => {
-				let fieldset = toggle.closest('fieldset');
-				let checkboxes = Array.from(fieldset.querySelectorAll('input[type="checkbox"]'));
-				checkboxes.forEach(checkbox => {
-					checkbox.checked = !checkbox.checked;
-				});
-			});
+			toggle.addEventListener('click', toggleCheckboxes);
 		});
 		node.query('[data-must-match]').forEach(match => {
 			match.pattern = new RegExp(document.querySelector(`[name="${match.dataset.mustMatch}"]`).value).escape();
