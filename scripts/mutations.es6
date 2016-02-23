@@ -7,16 +7,16 @@ function sameoriginFrom(form) {
 	return new URL(form.action).origin === location.origin;
 }
 
-function submitForm(form) {
+function submitForm(submit) {
 	submit.preventDefault();
-	let els = Array.from(form.querySelectorAll('fieldset, button'));
-	els.forEach(el => el.disabled = true);
+	let els = Array.from(submit.target.querySelectorAll('fieldset, button'));
 	if (!('confirm' in submit.target.dataset) || confirm(submit.target.dataset.confirm)) {
 		let body = new FormData(submit.target);
 		let headers = new Headers();
 		let url = new URL(submit.target.action, location.origin);
 		// body.append('nonce', sessionStorage.getItem('nonce'));
 		body.append('form', submit.target.name);
+		els.forEach(el => el.disabled = true);
 		headers.set('Accept', 'application/json');
 		fetch(url, {
 				method: submit.target.method || 'POST',
@@ -211,7 +211,9 @@ export function bootstrap() {
 				}).catch(reportError);
 			});
 		});
-		node.query('form[name]').filter(sameoriginFrom).forEach(submitForm);
+		node.query('form[name]').filter(sameoriginFrom).forEach(form => {
+			$(form).submit(submitForm);
+		});
 		node.query('[data-show]').forEach(el => {
 			el.addEventListener('click', click => {
 				document.querySelector(el.dataset.show).show();
