@@ -15,8 +15,7 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 			case 'readme':
 
 				$dom = \shgysk8zer0\DOM\HTML::getInstance();
-				call_user_func($dom->body, 'readme');
-				$readme = $dom->getElementsByTagName('dialog')->item(0);
+				$readme = call_user_func($dom->body, 'readme');
 				$resp->append('body', $readme);
 				$resp->showModal("#{$readme->id}");
 				break;
