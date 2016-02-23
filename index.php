@@ -18,6 +18,8 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 				$resp->showModal("#{$readme->id}");
 				break;
 		}
+	} else {
+		$resp->log($_REQUEST);
 	}
 	$resp->send();
 	exit();
