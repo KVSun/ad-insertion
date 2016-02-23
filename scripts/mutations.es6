@@ -1,7 +1,7 @@
-import {default as $} from './std-js/zq.es6';
-import {default as handleJSON} from './std-js/json_response.es6';
+import $ from './std-js/zq.es6';
+import handleJSON from './std-js/json_response.es6';
 import {reportError, parseResponse} from './std-js/functions.es6';
-import {default as supports} from './std-js/support_test.es6';
+import supports from './std-js/support_test.es6';
 
 function sameoriginFrom(form) {
 	return new URL(form.action).origin === location.origin;
