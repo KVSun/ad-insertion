@@ -2,124 +2,21 @@ import $ from './std-js/zq.es6';
 import handleJSON from './std-js/json_response.es6';
 import {reportError, parseResponse} from './std-js/functions.es6';
 import supports from './std-js/support_test.es6';
+import {
+	sameoriginFrom,
+	submitForm,
+	getDatalist,
+	getContextMenu,
+	updateFetchHistory,
+	matchPattern,
+	matchInput,
+	getLink,
+	toggleDetails,
+	toggleCheckboxes,
+	closeOnEscapeKey,
+	closeOnOutsideClick
+} from './eventHandlers.es6';
 
-function sameoriginFrom(form) {
-	return new URL(form.action).origin === location.origin;
-}
-
-function submitForm(submit) {
-	submit.preventDefault();
-	let els = Array.from(submit.target.querySelectorAll('fieldset, button'));
-	if (!('confirm' in submit.target.dataset) || confirm(submit.target.dataset.confirm)) {
-		let body = new FormData(submit.target);
-		let headers = new Headers();
-		let url = new URL(submit.target.action, location.origin);
-		// body.append('nonce', sessionStorage.getItem('nonce'));
-		body.append('form', submit.target.name);
-		els.forEach(el => el.disabled = true);
-		headers.set('Accept', 'application/json');
-		fetch(url, {
-				method: submit.target.method || 'POST',
-				headers,
-				body,
-				credentials: 'include'
-		}).then(parseResponse).then(handleJSON).catch(reportError);
-		els.forEach(el => el.disabled = false);
-	}
-}
-
-function getDatalist(list) {
-	if (!$('#' + list.getAttribute('list')).found) {
-		let url = new URL(document.baseURI);
-		let headers = new Headers();
-		let body = new URLSearchParams();
-		headers.set('Accept', 'application/json');
-		body.set('datalist', list.getAttribute('list'));
-		fetch(url, {
-			method: 'POST',
-			headers,
-			body,
-			credentials: 'include'
-		}).then(parseResponse).then(handleJSON).catch(reportError);
-	}
-}
-
-function getContextMenu(el) {
-	let menu = el.getAttribute('contextmenu');
-	if (menu && menu !== '') {
-		if (!$(`menu#${menu}`).found) {
-			let headers = new Headers();
-			let url = new URL(document.baseURI);
-			let body = new URLSearchParams();
-			body.set('load_menu', menu.replace(/\_menu$/, ''));
-			headers.set('Accept', 'application/json');
-			fetch(url, {
-				method: 'GET',
-				headers,
-				body,
-				credentials: 'include'
-			}).then(parseResponse).then(handleJSON).catch(reportError);
-		}
-	}
-}
-
-function getLink(click) {
-	click.preventDefault();
-	let url = new URL(this.href, location.origin);
-	let headers = new Headers();
-	headers.set('Accept', 'application/json');
-	if (typeof ga === 'function') {
-		ga('send', 'pageview', a.href);
-	}
-	fetch(url, {
-		method: 'GET',
-		headers
-	}).then(parseResponse).then(handleJSON).then(resp => {
-		history.pushState({}, document.title, this.href);
-		return resp;
-	}).catch(reportError);
-}
-
-function toggleCheckboxes(click) {
-	let fieldset = this.closest('fieldset');
-	let checkboxes = Array.from(fieldset.querySelectorAll('input[type="checkbox"]'));
-	checkboxes.forEach(checkbox => {
-		checkbox.checked = !checkbox.checked;
-	});
-}
-
-function closeOnOutsideClick(click) {
-	if (! click.target.matches(`dialog`)) {
-		$('dialog[open]').each(dialog => {
-			if ($(dialog.childNodes).some(node =>
-				node.dataset.hasOwnProperty('delete')
-				&& node.dataset.delete === `#${dialog.id}`
-			)) {
-				dialog.remove();
-			} else {
-				dialog.close();
-			}
-			document.body.removeEventListener('click', closeOnOutsideClick);
-			document.body.removeEventListener('keypress', closeOnEscapeKey);
-		});
-	}
-}
-function closeOnEscapeKey(keypress) {
-	if (keypress.key === 'Escape') {
-		$('dialog[open]').each(dialog => {
-			if ($(dialog.childNodes).some(node =>
-				node.dataset.hasOwnProperty('delete')
-				&& node.dataset.delete === `#${dialog.id}`
-			)) {
-				dialog.remove();
-			} else {
-				dialog.close();
-			}
-			document.body.removeEventListener('click', closeOnOutsideClick);
-			document.body.removeEventListener('keypress', closeOnEscapeKey);
-		});
-	}
-}
 export const watcher = {
 	childList: function() {
 		$(this.addedNodes).bootstrap();
@@ -189,13 +86,7 @@ export function bootstrap() {
 		}
 		if (!supports('details')) {
 			node.query('details > summary').forEach(summary => {
-				summary.addEventListener('click', click => {
-					if (summary.parentElement.hasAttribute('open')) {
-						summary.parentElement.close();
-					} else {
-						summary.parentElement.open();
-					}
-				});
+				summary.addEventListener('click', toggleDetails);
 			});
 		}
 		if (supports('menuitem')) {
@@ -226,7 +117,7 @@ export function bootstrap() {
 			a.addEventListener('click', getLink);
 		});
 		node.query('form[name]').filter(sameoriginFrom).forEach(form => {
-			$(form).submit(submitForm);
+			form.addEventListener('submit', submitForm);
 		});
 		node.query('[data-show]').forEach(el => {
 			el.addEventListener('click', click => {
@@ -254,23 +145,12 @@ export function bootstrap() {
 		node.query('fieldset button[type="button"].toggle').forEach(toggle => {
 			toggle.addEventListener('click', toggleCheckboxes);
 		});
-		node.query('[data-must-match]').forEach(match => {
-			match.pattern = new RegExp(document.querySelector(`[name="${match.dataset.mustMatch}"]`).value).escape();
-			document.querySelector(`[name="${match.dataset.mustMatch}"]`).addEventListener('change', change => {
-				document.querySelector(`[data-must-match="${change.target.name}"]`).pattern = new RegExp(change.target.value).escape();
-			});
-		});
+		node.query('[data-must-match]').forEach(matchPattern);
 		// node.query('[data-dropzone]') .forEach(function (el) {
 		// 	document.querySelector(el.dataset.dropzone).DnD(el);
 		// });
 		node.query('input[data-equal-input]').forEach(input => {
-			input.addEventListener('input', input => {
-				$(`input[data-equal-input="${input.target.dataset.equalInput}"]`).each(other => {
-					if (other !== input) {
-						other.value = input.value;
-					}
-				});
-			});
+			input.addEventListener('input', matchInput);
 		});
 		// node.query('menu[type="context"]').forEach(WYSIWYG);
 		// node.query('[data-request]').forEach(el => {
