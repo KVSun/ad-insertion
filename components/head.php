@@ -5,7 +5,7 @@ $frag = $dom->createDocumentFragment();
 $frag('title', 'Ad Insertion');
 $frag('link', null, [
 	'rel' => 'icon',
-	'href' => 'sun.svg',
+	'href' => 'favicon.svg',
 	'type' => 'image/svg+xml',
 	'sizes' => 'any'
 ]);
