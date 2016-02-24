@@ -9,13 +9,12 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 	call_user_func($dom->body, 'header', 'main', 'footer');
 	exit($dom);
 } elseif ($headers->accept === 'application/json' and !empty($_REQUEST)) {
-	$resp = \shgysk8zer0\Core\JSON_Response::load();
+	$resp = \shgysk8zer0\Core\JSON_Response::getInstance();
 	if (array_key_exists('load', $_REQUEST)) {
 		switch($_REQUEST['load']) {
 			case 'readme':
 				$readme = call_user_func($dom->body, 'readme')[0];
-				$resp->append('body', $readme);
-				$resp->showModal("#{$readme->id}");
+				$resp->append('body', $readme)->showModal("#{$readme->id}");
 				break;
 		}
 	} else {
@@ -24,5 +23,5 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 	$resp->send();
 	exit();
 } else {
-	http_response_code(404);
+	http_response_code(\shgysk8zer0\Core_API\Abstracts\HTTPStatusCodes::BAD_REQUEST);
 }
