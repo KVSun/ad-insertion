@@ -116,7 +116,7 @@ function toggleCheckboxes(click) {
 }
 
 function closeOnOutsideClick(click) {
-	if (! click.target.matches(`dialog`)) {
+	if (! click.target.matches(`dialog, dialog *`)) {
 		$('dialog[open]').each(dialog => {
 			if ($(dialog.childNodes).some(node =>
 				node.dataset.hasOwnProperty('delete')
