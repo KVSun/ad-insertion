@@ -1,6 +1,7 @@
 <?php
 \shgysk8zer0\Core\Console::getInstance()->asErrorHandler()->asExceptionHandler();
 \shgysk8zer0\DOM\HTMLElement::$import_path = realpath(getenv('COMPONENTS_DIR'));
+$url = \shgysk8zer0\Core\URL::getInstance();
 $headers = \shgysk8zer0\Core\Headers::getInstance();
 $dom = \shgysk8zer0\DOM\HTML::getInstance();
 if (in_array('text/html', explode(',', $headers->accept))) {
@@ -16,6 +17,13 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 				$readme = call_user_func($dom->body, 'readme')[0];
 				$resp->append('body', $readme)->showModal("#{$readme->id}");
 				break;
+
+			case 'ad-insertion':
+				$dialog = $dom->body->append('dialog', null, ['id' => 'ad-insertion-dialog']);
+				$dialog->append('button', null, ['data-delete' => "#{$dialog->id}"]);
+				$dialog->append('br');
+				$dialog('forms/ad-insertion');
+				$resp->append('body', $dialog)->showModal("#{$dialog->id}");
 		}
 	} else {
 		$resp->log($_REQUEST);
