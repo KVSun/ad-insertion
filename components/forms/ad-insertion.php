@@ -10,7 +10,7 @@ $section->append('input', null, [
 	'type' => 'date',
 	'name' => 'ad-insertion[date]',
 	'id' => 'ad-insertion[date]',
-	'placeholder' => 'YY-mm-dd',
+	'placeholder' => 'YYYY-mm-dd',
 	'require' => true
 ]);
 $section->append('label', 'By: ', ['for' => 'ad-insertion[by]']);
@@ -182,18 +182,18 @@ $charges->append('h2', 'Run Dates');
 $charges->append('hr');
 $charges->append('label', 'From: ', ['for' => 'ad-insertion[run][start]']);
 $charges->append('input', null, [
-	'type' => 'date',
+	'type' => 'week',
 	'name' => 'ad-insertion[run][start]',
 	'id' => 'ad-insertion[run][start]',
-	'placeholder' => 'YYYY-mm-dd',
+	'placeholder' => 'YYYY-W##',
 	'required' => ''
 ]);
 $charges->append('label', 'To: ', ['for' => 'ad-insertion[run][end]']);
 $charges->append('input', null, [
-	'type' => 'date',
+	'type' => 'week',
 	'name' => 'ad-insertion[run][end]',
 	'id' => 'ad-insertion[run][end]',
-	'placeholder' => 'YYYY-mm-dd',
+	'placeholder' => 'YYYY-W##',
 	'required' => ''
 ]);
 $charges->append('label', null, [
