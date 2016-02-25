@@ -134,6 +134,11 @@ export function autoCloseDialog(dialog) {
 			node.dataset.hasOwnProperty('delete')
 			&& node.dataset.delete === `#${dialog.id}`
 		)) {
+			try {
+				if (dialog.nextElementSibling.matches('.backdrop')) {
+					dialog.nextElementSibling.remove();
+				}
+			} catch(e) {}
 			dialog.remove();
 		} else {
 			dialog.close();
