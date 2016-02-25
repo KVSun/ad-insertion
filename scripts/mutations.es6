@@ -14,7 +14,8 @@ import {
 	toggleDetails,
 	toggleCheckboxes,
 	closeOnEscapeKey,
-	closeOnOutsideClick
+	closeOnOutsideClick,
+	confirmDialogClose
 } from './eventHandlers.es6';
 
 export const watcher = {
@@ -187,7 +188,12 @@ export function bootstrap() {
 		});
 		node.query('[data-delete]').forEach(function(el) {
 			el.addEventListener('click', click => {
-				$(el.dataset.delete).remove();
+				let target = $(el.dataset.delete);
+				target.each(el => {
+					if (confirmDialogClose(el)) {
+						target.remove();
+					}
+				});
 			});
 		});
 	});

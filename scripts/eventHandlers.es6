@@ -117,35 +117,35 @@ function toggleCheckboxes(click) {
 
 function closeOnOutsideClick(click) {
 	if (! click.target.matches(`dialog, dialog *`)) {
-		$('dialog[open]').each(dialog => {
-			if ($(dialog.childNodes).some(node =>
-				node.dataset.hasOwnProperty('delete')
-				&& node.dataset.delete === `#${dialog.id}`
-			)) {
-				dialog.remove();
-			} else {
-				dialog.close();
-			}
-			document.body.removeEventListener('click', closeOnOutsideClick);
-			document.body.removeEventListener('keypress', closeOnEscapeKey);
-		});
+		$('dialog[open]:first-of-type').each(autoCloseDialog);
+	}
+}
+
+export function confirmDialogClose(dialog) {
+	if ($(dialog.childNodes).some(node => node.tagName === 'FORM')) {
+		return confirm('This will cause you to lose any data entered in the form. Continue?');
+	}
+	return true;
+}
+
+export function autoCloseDialog(dialog) {
+	if (confirmDialogClose(dialog)) {
+		if ($(dialog.childNodes).some(node =>
+			node.dataset.hasOwnProperty('delete')
+			&& node.dataset.delete === `#${dialog.id}`
+		)) {
+			dialog.remove();
+		} else {
+			dialog.close();
+		}
+		document.body.removeEventListener('click', closeOnOutsideClick);
+		document.body.removeEventListener('keypress', closeOnEscapeKey);
 	}
 }
 
 function closeOnEscapeKey(keypress) {
 	if (keypress.key === 'Escape') {
-		$('dialog[open]').each(dialog => {
-			if ($(dialog.childNodes).some(node =>
-				node.dataset.hasOwnProperty('delete')
-				&& node.dataset.delete === `#${dialog.id}`
-			)) {
-				dialog.remove();
-			} else {
-				dialog.close();
-			}
-			document.body.removeEventListener('click', closeOnOutsideClick);
-			document.body.removeEventListener('keypress', closeOnEscapeKey);
-		});
+		$('dialog[open]:first-of-type').each(autoCloseDialog);
 	}
 }
 
