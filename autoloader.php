@@ -25,6 +25,6 @@ if (version_compare(PHP_VERSION, getenv('MIN_PHP_VERSION'), '<')) {
 }
 
 // Configure autoloader
-set_include_path(realpath(getenv('AUTOLOAD_DIR')) . PATH_SEPARATOR . get_include_path());
+set_include_path(realpath(getenv('AUTOLOAD_DIR')) . PATH_SEPARATOR . getenv('CONFIG_DIR') . DIRECTORY_SEPARATOR . get_include_path());
 spl_autoload_register(getenv('AUTOLOAD_FUNC'));
 spl_autoload_extensions(getenv('AUTOLOAD_EXTS'));
