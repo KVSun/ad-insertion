@@ -191,7 +191,12 @@ export function bootstrap() {
 				let target = $(el.dataset.delete);
 				target.each(el => {
 					if (confirmDialogClose(el)) {
-						target.remove();
+						try {
+							if (el.nextElementSibling.matches('.backdrop')) {
+								el.nextElementSibling.remove();
+							}
+						} catch(e) {}
+						el.remove();
 					}
 				});
 			});
