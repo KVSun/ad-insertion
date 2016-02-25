@@ -14,5 +14,6 @@ namespace KVSun\Handlers
 	} else {
 		\shgysk8zer0\Core\JSON_Response::getInstance()->log($_REQUEST);
 	}
+	\shgysk8zer0\Core\Console::getInstance()->sendLogHeader();
 	exit(\shgysk8zer0\Core\JSON_Response::getInstance());
 }
