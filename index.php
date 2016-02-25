@@ -10,26 +10,8 @@ if (in_array('text/html', explode(',', $headers->accept))) {
 	call_user_func($dom->body, 'header', 'main', 'footer');
 	exit($dom);
 } elseif ($headers->accept === 'application/json' and !empty($_REQUEST)) {
-	$resp = \shgysk8zer0\Core\JSON_Response::getInstance();
-	if (array_key_exists('load', $_REQUEST)) {
-		switch($_REQUEST['load']) {
-			case 'readme':
-				$readme = call_user_func($dom->body, 'readme')[0];
-				$resp->append('body', $readme)->showModal("#{$readme->id}");
-				break;
-
-			case 'ad-insertion':
-				$dialog = $dom->body->append('dialog', null, ['id' => 'ad-insertion-dialog']);
-				$dialog->append('button', null, ['data-delete' => "#{$dialog->id}"]);
-				$dialog->append('br');
-				$dialog('forms/ad-insertion');
-				$resp->append('body', $dialog)->showModal("#{$dialog->id}");
-		}
-	} else {
-		$resp->log($_REQUEST);
-	}
-	$resp->send();
-	exit();
+	require './components/handlers/request.php';
+	exit;
 } else {
 	http_response_code(\shgysk8zer0\Core_API\Abstracts\HTTPStatusCodes::BAD_REQUEST);
 }
