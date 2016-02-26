@@ -21,11 +21,6 @@ $frag('link', null, [
 ]);
 $frag('script', null, [
 	'type' => 'application/javascript',
-	'src' => 'scripts/std-js/prototypes.es6',
-	'defer' => true
-]);
-$frag('script', null, [
-	'type' => 'application/javascript',
 	'src' => 'scripts/custom.js',
 	'defer' => true
 ]);
