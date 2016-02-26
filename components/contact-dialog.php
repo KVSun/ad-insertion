@@ -4,7 +4,7 @@ $dialog = \shgysk8zer0\DOM\HTML::getInstance()->createElement('dialog');
 $dialog->id = 'contact-dialog';
 $dialog->append('button', null, [
 	'type' => 'button',
-	'data-close' => '#contact-dialog'
+	'data-close' => "#{$dialog->id}"
 ]);
 $dialog->append('br');
 $dialog->append('a', null, [

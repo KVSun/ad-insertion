@@ -10,6 +10,10 @@ switch($_REQUEST['load']) {
 	case 'ad-insertion':
 		$dialog = $dom->body->append('dialog', null, ['id' => 'ad-insertion-dialog']);
 		$dialog->append('button', null, ['data-delete' => "#{$dialog->id}"]);
+		$dialog->append('button', null, [
+			'type' => 'button',
+			'data-fullscreen' => "#{$dialog->id}"
+		]);
 		$dialog->append('br');
 		$dialog('forms/ad-insertion');
 		$resp->append('body', $dialog)->showModal("#{$dialog->id}");

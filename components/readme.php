@@ -6,6 +6,10 @@ $readme->append('button', null, [
 	'type' => 'button',
 	'data-delete' => "#{$readme->id}"
 ]);
+$readme->append('button', null, [
+	'type' => 'button',
+	'data-fullscreen' => "#{$readme->id}"
+]);
 $readme->append('br');
 $readme->importHTML($parsedown->text(file_get_contents('README.md')));
 return $readme;

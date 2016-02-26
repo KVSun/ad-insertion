@@ -1,6 +1,6 @@
 import $ from './std-js/zq.es6';
 import handleJSON from './std-js/json_response.es6';
-import {reportError, parseResponse} from './std-js/functions.es6';
+import {reportError, parseResponse, query, fullScreen} from './std-js/functions.es6';
 import supports from './std-js/support_test.es6';
 import {
 	sameoriginFrom,
@@ -17,6 +17,28 @@ import {
 	closeOnOutsideClick,
 	confirmDialogClose
 } from './eventHandlers.es6';
+
+function pictureShim(picture) {
+	if ('matchMedia' in window) {
+		let sources = picture.querySelectorAll('source[media][srcset]');
+		for (let n = 0; n < sources.length; n++) {
+			if (matchMedia(sources[n].getAttribute('media')).matches) {
+				picture.getElementsByTagName('img')[0].src = sources[n].getAttribute('srcset');
+				break;
+			}
+		}
+	} else {
+		picture.getElementsByTagName('img')[0].src = picture.querySelector('source[media][srcset]').getAttribute('srcset');
+	}
+}
+
+function toggleFullScreen(){
+	if (fullScreen) {
+		document.cancelFullScreen();
+	} else {
+		document.querySelector(this.dataset.fullscreen).requestFullScreen();
+	}
+}
 
 export const watcher = {
 	childList: function() {
@@ -86,75 +108,64 @@ export function bootstrap() {
 			return this;
 		}
 		if (!supports('details')) {
-			node.query('details > summary').forEach(summary => {
+			query('details > summary', node).forEach(summary => {
 				summary.addEventListener('click', toggleDetails);
 			});
 		}
 		if (supports('menuitem')) {
-			node.query('[contextmenu]').forEach(getContextMenu);
+			query('[contextmenu]', node).forEach(getContextMenu);
 		}
 		if (supports('datalist')) {
-			node.query('[list]').forEach(getDatalist);
+			query('[list]', node).forEach(getDatalist);
 		}
 		if (!supports('picture')) {
-			node.query('picture').forEach(function(picture) {
-				if ('matchMedia' in window) {
-					let sources = picture.querySelectorAll('source[media][srcset]');
-					for (let n = 0; n < sources.length; n++) {
-						if (matchMedia(sources[n].getAttribute('media')).matches) {
-							picture.getElementsByTagName('img')[0].src = sources[n].getAttribute('srcset');
-							break;
-						}
-					}
-				} else {
-					picture.getElementsByTagName('img')[0].src = picture.querySelector('source[media][srcset]').getAttribute('srcset');
-				}
-			});
+			query('picture', node).forEach(pictureShim);
 		}
-		node.query('[autofocus]').forEach(input => input.focus());
-		node.query(
-			'a[href]:not([target="_blank"]):not([download]):not([href*="\#"])'
+		query('[autofocus]', node).forEach(input => input.focus());
+		query(
+			'a[href]:not([target="_blank"]):not([download]):not([href*="\#"])',
+			node
 		).filter(link => link.origin === location.origin).forEach(a => {
 			a.addEventListener('click', getLink);
 		});
-		node.query('form[name]').filter(sameoriginFrom).forEach(form => {
+		query('form[name]', node).filter(sameoriginFrom).forEach(form => {
 			form.addEventListener('submit', submitForm);
 		});
-		node.query('[data-show]').forEach(el => {
+		query('[data-show]', node).forEach(el => {
 			el.addEventListener('click', click => {
 				document.querySelector(el.dataset.show).show();
 			});
 		});
-		node.query('[data-show-modal]').forEach(el => {
+		query('[data-show-modal]', node).forEach(el => {
 			el.addEventListener('click', click => {
 				document.querySelector(el.dataset.showModal).showModal();
 			});
 		});
-		node.query('[data-scroll-to]').forEach(el => {
+		query('[data-scroll-to]', node).forEach(el => {
 			el.addEventListener('click', click => {
 				document.querySelector(el.dataset.scrollTo).scrollIntoView();
 			});
 		});
-		// node.query('[data-import]').forEach(el => {
+		// query('[data-import]', node).forEach(el => {
 		// 	el.HTMLimport();
 		// });
-		node.query('[data-close]').forEach(el => {
+		query('[data-close]', node).forEach(el => {
 			el.addEventListener('click', click => {
 				document.querySelector(el.dataset.close).close();
 			});
 		});
-		node.query('fieldset button[type="button"].toggle').forEach(toggle => {
+		query('fieldset button[type="button"].toggle', node).forEach(toggle => {
 			toggle.addEventListener('click', toggleCheckboxes);
 		});
-		node.query('[data-must-match]').forEach(matchPattern);
-		// node.query('[data-dropzone]') .forEach(function (el) {
+		query('[data-must-match]', node).forEach(matchPattern);
+		// query('[data-dropzone]', node) .forEach(function (el) {
 		// 	document.querySelector(el.dataset.dropzone).DnD(el);
 		// });
-		node.query('input[data-equal-input]').forEach(input => {
+		query('input[data-equal-input]', node).forEach(input => {
 			input.addEventListener('input', matchInput);
 		});
-		// node.query('menu[type="context"]').forEach(WYSIWYG);
-		// node.query('[data-request]').forEach(el => {
+		// query('menu[type="context"]', node).forEach(WYSIWYG);
+		// query('[data-request]', node).forEach(el => {
 		// 	el.addEventListener('click', click => {
 		// 		click.preventDefault();
 		// 		if (!(el.dataset.hasOwnProperty('confirm')) || confirm(el.dataset.confirm)) {
@@ -174,19 +185,13 @@ export function bootstrap() {
 		// 		}
 		// 	});
 		// });
-		// node.query('[data-dropzone]').forEach(finput => {
+		// query('[data-dropzone]', node).forEach(finput => {
 		// 	document.querySelector(finput.dataset.dropzone).DnD(finput);
 		// });
-		node.query('[data-fullscreen]').forEach(el => {
-			el.addEventListener('click', click => {
-				if (fullScreen) {
-					document.cancelFullScreen();
-				} else {
-					document.querySelector(el.dataset.fullscreen).requestFullScreen();
-				}
-			});
+		query('[data-fullscreen]', node).forEach(el => {
+			el.addEventListener('click', toggleFullScreen);
 		});
-		node.query('[data-delete]').forEach(function(el) {
+		query('[data-delete]', node).forEach(function(el) {
 			el.addEventListener('click', click => {
 				let target = $(el.dataset.delete);
 				target.each(el => {
