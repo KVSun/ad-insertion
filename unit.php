@@ -24,7 +24,5 @@ namespace Unit
 		exit();
 	}
 	require_once getenv('AUTOLOAD_SCRIPT');
-	$unit = new \shgysk8zer0\Core\NamespacedFunction('\Test_Funcs');
-	$unit->lint_scripts_recursive(__DIR__);
-	assert('class_exists("\shgysk8zer0\Core\Timer")', 'Autoloader mis-configured');
+	\shgysk8zer0\Core\NamespacedFunction::{'\Test_funcs\lint_scripts_recursive'}(__DIR__);
 }
