@@ -19,5 +19,5 @@ $footer->append('button', null, [
 	'data-show-modal' => '#contact-dialog'
 ])->import(\shgysk8zer0\DOM\SVG::useIcon('person', $size));
 $footer->append('a', 'Ad Insertion', ['href' => $url]);
-$footer('contact-dialog');
+$footer('contact_dialog');
 return $footer;

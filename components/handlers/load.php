@@ -16,6 +16,6 @@ switch($_REQUEST['load']) {
 			'data-fullscreen' => "#{$dialog->id}"
 		]);
 		$dialog->append('br');
-		$dialog('forms/ad-insertion');
+		$dialog('forms/ad_insertion');
 		$resp->append('body', $dialog)->showModal("#{$dialog->id}");
 }
