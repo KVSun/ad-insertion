@@ -12,7 +12,7 @@ $footer->append('a', null, [
 	'role' => 'button'
 ])->import(\shgysk8zer0\DOM\SVG::useIcon('book', $size));
 
-$params->load = 'ad-insertion';
+$params->load = 'ad_insertion';
 $url->query = "$params";
 $footer->append('button', null, [
 	'title' => 'Contact info',

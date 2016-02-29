@@ -1,5 +1,6 @@
 <?php
 namespace Components\Handlers\Load;
+const ERROR_FORMAT = 'Do not know how to load "%s"';
 $resp = \shgysk8zer0\Core\JSON_Response::getInstance();
 $dom = \shgysk8zer0\DOM\HTML::getInstance();
 switch($_REQUEST['load']) {
@@ -8,7 +9,7 @@ switch($_REQUEST['load']) {
 		$resp->append('body', $readme)->showModal("#{$readme->id}");
 		break;
 
-	case 'ad-insertion':
+	case 'ad_insertion':
 		$dialog = $dom->body->append('dialog', null, ['id' => 'ad-insertion-dialog']);
 		$dialog->append('button', null, ['data-delete' => "#{$dialog->id}"]);
 		$dialog->append('button', null, [
@@ -18,4 +19,13 @@ switch($_REQUEST['load']) {
 		$dialog->append('br');
 		$dialog('forms/ad_insertion');
 		$resp->append('body', $dialog)->showModal("#{$dialog->id}");
+		break;
+
+	default:
+		$resp->notify(
+			'Unhandled request',
+			sprintf(ERROR_FORMAT, $_REQUEST['load']),
+			'images/octicons/svg/bug.svg'
+		)->error(['$_REQUEST' => $_REQUEST]);
+		\shgysk8zer0\Core\Console::getInstance()->error(sprintf(ERROR_FORMAT, $_REQUEST['load']));
 }
