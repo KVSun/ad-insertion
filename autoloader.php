@@ -1,13 +1,15 @@
 <?php
+namespace Autoloader;
+function assert_callback($script, $line, $code = 0, $message = null)
+{
+	echo sprintf('Assert failed: [%s:%u] "%s"', $script, $line, $message) . PHP_EOL;
+}
 // Configure assert options based on server usage (CLI or not)
 if (PHP_SAPI === 'cli') {
 	assert_options(ASSERT_ACTIVE,   true);
 	assert_options(ASSERT_BAIL,     true);
 	assert_options(ASSERT_WARNING,  false);
-	assert_options(ASSERT_CALLBACK, function($script, $line, $code = 0, $message = null)
-	{
-		echo sprintf('Assert failed: [%s:%u] "%s"', $script, $line, $message) . PHP_EOL;
-	});
+	assert_options(ASSERT_CALLBACK, '\\' . __NAMESPACE__ . '\\assert_callback');
 } else {
 	assert_options(ASSERT_ACTIVE,  false);
 	assert_options(ASSERT_BAIL,    false);

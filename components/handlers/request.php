@@ -1,5 +1,5 @@
 <?php
-namespace KVSun\Handlers
+namespace Components\Handlers\Request
 {
 	function load_handler($handler)
 	{
