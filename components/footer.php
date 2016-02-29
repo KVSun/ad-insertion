@@ -1,4 +1,5 @@
 <?php
+namespace Components\Footer;
 $size = ['height' => 50, 'width' => 50];
 $url = \shgysk8zer0\Core\URL::getInstance();
 $params = new \shgysk8zer0\Core\URLSearchParams();

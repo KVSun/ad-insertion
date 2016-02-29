@@ -1,4 +1,5 @@
 <?php
+namespace Components\Contact_Dialog;
 $size = ['height' => 60, 'width' => 60];
 $dialog = \shgysk8zer0\DOM\HTML::getInstance()->createElement('dialog');
 $dialog->id = 'contact-dialog';

@@ -1,4 +1,5 @@
 <?php
+namespace Components\Handlers\Load;
 $resp = \shgysk8zer0\Core\JSON_Response::getInstance();
 $dom = \shgysk8zer0\DOM\HTML::getInstance();
 switch($_REQUEST['load']) {

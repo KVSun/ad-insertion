@@ -1,5 +1,5 @@
 <?php
-namespace KVSUN\Components\Main
+namespace Components\Main
 {
 	/**
 	 * Returns a link for a PHP search for an extension

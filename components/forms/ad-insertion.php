@@ -1,9 +1,10 @@
 <?php
+namespace Components\Forms\Ad_Insertion;
 $form = \shgysk8zer0\DOM\HTML::getinstance()->createElement('form');
-$form->name = 'ad-insertion';
+$form->name = basename(__FILE__, '.php');
 $form->action = '.';
 $form->method = 'POST';
-$section = $form->append('fieldset', null, ['form' => 'ad-insertion']);
+$section = $form->append('fieldset', null, ['form' => $form->name]);
 $section->append('legend', 'Section');
 $section->append('label', 'Date: ', ['for' => 'ad-insertion[date]']);
 $section->append('input', null, [

@@ -1,4 +1,5 @@
 <?php
+namespace Index;
 \shgysk8zer0\Core\Console::getInstance()->asErrorHandler()->asExceptionHandler();
 \shgysk8zer0\DOM\HTMLElement::$import_path = realpath(getenv('COMPONENTS_DIR'));
 $url = \shgysk8zer0\Core\URL::getInstance();

@@ -1,4 +1,5 @@
 <?php
+namespace Components\Head;
 $dom = \shgysk8zer0\DOM\HTML::getInstance();
 $frag = $dom->createDocumentFragment();
 
