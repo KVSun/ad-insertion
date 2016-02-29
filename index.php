@@ -25,7 +25,7 @@ function init()
 		build_body($dom->body);
 		return $dom;
 	} elseif ($headers->accept === 'application/json' and !empty($_REQUEST)) {
-		require './components/handlers/request.php';
+		return require './components/handlers/request.php';
 	} else {
 		http_response_code(\shgysk8zer0\Core_API\Abstracts\HTTPStatusCodes::BAD_REQUEST);
 	}

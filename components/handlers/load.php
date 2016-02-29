@@ -14,7 +14,7 @@ function load_request($request)
 	switch($request) {
 		case 'readme':
 			$readme = call_user_func($dom->body, 'readme')[0];
-			$resp->append('body', $readme)->showModal("#{$readme->id}");
+			return $resp->append('body', $readme)->showModal("#{$readme->id}");
 			break;
 
 		case 'ad_insertion':
@@ -26,17 +26,17 @@ function load_request($request)
 			]);
 			$dialog->append('br');
 			$dialog('forms/ad_insertion');
-			$resp->append('body', $dialog)->showModal("#{$dialog->id}");
+			return $resp->append('body', $dialog)->showModal("#{$dialog->id}");
 			break;
 
 		default:
-			$resp->notify(
+			\shgysk8zer0\Core\Console::getInstance()->error(sprintf(ERROR_FORMAT, $request));
+			return $resp->notify(
 				'Unhandled request',
 				sprintf(ERROR_FORMAT, $_REQUEST['load']),
 				'images/octicons/svg/bug.svg'
 			)->error(['$_REQUEST' => $_REQUEST]);
-			\shgysk8zer0\Core\Console::getInstance()->error(sprintf(ERROR_FORMAT, $_REQUEST['load']));
 	}
 
 }
-load_request($_REQUEST['load']);
+return load_request($_REQUEST['load']);
