@@ -16,12 +16,12 @@ function loadFooter()
 
 	$params->load = 'ad_insertion';
 	$url->query = "$params";
+	$contact = $footer('contact_dialog')[0];
 	$footer->append('button', null, [
 		'title' => 'Contact info',
-		'data-show-modal' => '#contact-dialog'
+		'data-show-modal' => "#{$contact->id}"
 	])->import(\shgysk8zer0\DOM\SVG::useIcon('person', $size));
 	$footer->append('a', 'Ad Insertion', ['href' => $url]);
-	$footer('contact_dialog');
 	return $footer;
 }
 return loadFooter();
