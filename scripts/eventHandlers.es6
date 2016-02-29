@@ -1,7 +1,7 @@
 import $ from './std-js/zq.es6';
 import handleJSON from './std-js/json_response.es6';
 import {reportError, parseResponse} from './std-js/functions.es6';
-import supports from './std-js/support_test.es6';
+// import supports from './std-js/support_test.es6';
 
 function sameoriginFrom(form) {
 	return new URL(form.action).origin === location.origin;
@@ -19,10 +19,10 @@ function submitForm(submit) {
 		els.forEach(el => el.disabled = true);
 		headers.set('Accept', 'application/json');
 		fetch(url, {
-				method: submit.target.method || 'POST',
-				headers,
-				body,
-				credentials: 'include'
+			method: submit.target.method || 'POST',
+			headers,
+			body,
+			credentials: 'include'
 		}).then(parseResponse).then(handleJSON).catch(reportError);
 		els.forEach(el => el.disabled = false);
 	}
@@ -91,7 +91,7 @@ function getLink(click) {
 	let headers = new Headers();
 	headers.set('Accept', 'application/json');
 	if (typeof ga === 'function') {
-		ga('send', 'pageview', a.href);
+		ga('send', 'pageview', this.href);
 	}
 	fetch(url, {
 		method: 'GET',
@@ -107,7 +107,7 @@ function toggleDetails() {
 	}
 }
 
-function toggleCheckboxes(click) {
+function toggleCheckboxes() {
 	let fieldset = this.closest('fieldset');
 	let checkboxes = Array.from(fieldset.querySelectorAll('input[type="checkbox"]'));
 	checkboxes.forEach(checkbox => {
@@ -116,7 +116,7 @@ function toggleCheckboxes(click) {
 }
 
 function closeOnOutsideClick(click) {
-	if (! click.target.matches(`dialog, dialog *`)) {
+	if (! click.target.matches('dialog, dialog *')) {
 		$('dialog[open]:first-of-type').each(autoCloseDialog);
 	}
 }
@@ -138,7 +138,9 @@ export function autoCloseDialog(dialog) {
 				if (dialog.nextElementSibling.matches('.backdrop')) {
 					dialog.nextElementSibling.remove();
 				}
-			} catch(e) {}
+			} catch(e) {
+				return;
+			}
 			dialog.remove();
 		} else {
 			dialog.close();
