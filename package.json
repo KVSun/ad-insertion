@@ -38,12 +38,5 @@
 		"update": "git submodule update --init --recursive",
 		"test": "php unit.php",
 		"postinstall": "npm run update"
-	},
-	"babel": {
-		"presets": ["es2015"],
-		"sourceMaps": true,
-		"only": "*.es6",
-		"compact": true,
-		"comments": false
 	}
 }
