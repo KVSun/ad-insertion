@@ -11,6 +11,8 @@ env:
     - AUTOLOAD_SCRIPT="./autoloader.php"
     - COMPONENTS_DIR="components"
     - CONFIG_DIR="config"
+before_script:
+  npm install
 script: npm run test
 notifications:
   slack: kvsun:7psPgb0dg4raXU22LunLomH3
