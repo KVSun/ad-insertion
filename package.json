@@ -19,15 +19,15 @@
 		"url": "https://github.com/KVSun/ad-insertion/issues"
 	},
 	"engines": {
-		"php": ">5.5.0",
-		"npm": "~3.5.4"
+		"php": ">=5.5",
+		"npm": ">=3.5"
 	},
 	"dependencies": {
-		"eslint": "^2.2",
-		"webpack": "^1.12",
-		"babel-core": "^6.4",
+		"eslint": ">=2.2",
+		"webpack": ">=1.12",
+		"babel-core": ">=6.4",
 		"babel-preset-es2015": "*",
-		"babel-loader": "^6.2.1"
+		"babel-loader": ">=6.2"
 	},
 	"scripts": {
 		"build:css": "myth stylesheets/styles/import.css -c stylesheets/styles/styles.css",
