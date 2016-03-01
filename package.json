@@ -20,7 +20,7 @@
 	},
 	"engines": {
 		"php": ">5.5.0",
-		"npm": "~3.5.0"
+		"npm": "~3.5.4"
 	},
 	"dependencies": {
 		"eslint": "^2.2",
