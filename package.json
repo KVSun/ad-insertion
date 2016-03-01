@@ -22,8 +22,7 @@
 		"php": ">5.5.0",
 		"npm": "~3.5.0"
 	},
-	"dependencies": {},
-	"devDependencies": {
+	"dependencies": {
 		"eslint": "*",
 		"webpack": "^1.0.0",
 		"babel-core": "*",
