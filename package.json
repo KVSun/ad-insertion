@@ -23,9 +23,9 @@
 		"npm": "~3.5.0"
 	},
 	"dependencies": {
-		"eslint": "*",
-		"webpack": "^1.0.0",
-		"babel-core": "*",
+		"eslint": "^2.2",
+		"webpack": "^1.12",
+		"babel-core": "^6.4",
 		"babel-preset-es2015": "*",
 		"babel-loader": "^6.2.1"
 	},
