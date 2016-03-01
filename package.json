@@ -37,7 +37,9 @@
 		"lint:js": "eslint  --ext .es6 --fix .",
 		"lint:php": "php unit.php",
 		"update": "git submodule update --init --recursive",
+		"pretest": "npm install",
 		"test": "npm run lint:php && npm run lint:js",
+		"posttest": "ls",
 		"postinstall": "npm run update"
 	}
 }
