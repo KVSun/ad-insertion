@@ -7,7 +7,7 @@ import {
 	submitForm,
 	getDatalist,
 	getContextMenu,
-	updateFetchHistory,
+	// updateFetchHistory,
 	matchPattern,
 	matchInput,
 	getLink,
@@ -52,40 +52,38 @@ export const watcher = {
 	},
 	attributes: function() {
 		switch (this.attributeName) {
-			case 'contextmenu':
-				let menu = this.target.getAttribute('contextmenu');
-				if (this.oldValue !== '') {
-					$(`menu#${this.oldValue}`).remove();
+		case 'contextmenu':
+			var menu = this.target.getAttribute('contextmenu');
+			if (this.oldValue !== '') {
+				$(`menu#${this.oldValue}`).remove();
+			}
+			if (menu && menu !== '') {
+				if (!$('menu#' + menu).found) {
+					fetch(document.baseURI, {
+						method: 'POST',
+						headers: new Headers({Accept: 'application/json'}),
+						body: new URLSearchParams(`load_menu=${menu.replace(/\_menu$/, '')}`),
+						credentials: 'include'
+					}).then(parseResponse).then(handleJSON).catch(reportError);
 				}
-				if (menu && menu !== '') {
-					if (!$('menu#' + menu).found) {
-						fetch(document.baseURI, {
-							method: 'POST',
-							headers: new Headers({Accept: 'application/json'}),
-							body: new URLSearchParams(`load_menu=${menu.replace(/\_menu$/, '')}`),
-							credentials: 'include'
-						}).then(parseResponse).then(handleJSON).catch(function(exc) {
-							console.error(exc);
-						});
-					}
-				}
-				break;
+			}
+			break;
 
-			case 'open':
-				if (this.target.tagName === 'DIALOG') {
-					if (this.target.hasAttribute('open')) {
-						setTimeout(() => {
-							$(document.body).click(closeOnOutsideClick).keypress(closeOnEscapeKey);
-						}, 500);
-					} else {
-						document.body.removeEventListener('click', closeOnOutsideClick);
-						document.body.removeEventListener('keypress', closeOnEscapeKey);
-					}
+		case 'open':
+			if (this.target.tagName === 'DIALOG') {
+				if (this.target.hasAttribute('open')) {
+					setTimeout(() => {
+						$(document.body).click(closeOnOutsideClick).keypress(closeOnEscapeKey);
+					}, 500);
+				} else {
+					document.body.removeEventListener('click', closeOnOutsideClick);
+					document.body.removeEventListener('keypress', closeOnEscapeKey);
 				}
-				break;
+			}
+			break;
 
-			default:
-				console.error(`Unhandled attribute in watch: "${this.attributeName}"`);
+		default:
+			console.error(`Unhandled attribute in watch: "${this.attributeName}"`);
 		}
 	}
 };
@@ -132,17 +130,17 @@ export function bootstrap() {
 			form.addEventListener('submit', submitForm);
 		});
 		query('[data-show]', node).forEach(el => {
-			el.addEventListener('click', click => {
+			el.addEventListener('click', () => {
 				document.querySelector(el.dataset.show).show();
 			});
 		});
 		query('[data-show-modal]', node).forEach(el => {
-			el.addEventListener('click', click => {
+			el.addEventListener('click', () => {
 				document.querySelector(el.dataset.showModal).showModal();
 			});
 		});
 		query('[data-scroll-to]', node).forEach(el => {
-			el.addEventListener('click', click => {
+			el.addEventListener('click', () => {
 				document.querySelector(el.dataset.scrollTo).scrollIntoView();
 			});
 		});
@@ -150,7 +148,7 @@ export function bootstrap() {
 		// 	el.HTMLimport();
 		// });
 		query('[data-close]', node).forEach(el => {
-			el.addEventListener('click', click => {
+			el.addEventListener('click', () => {
 				document.querySelector(el.dataset.close).close();
 			});
 		});
@@ -192,7 +190,7 @@ export function bootstrap() {
 			el.addEventListener('click', toggleFullScreen);
 		});
 		query('[data-delete]', node).forEach(function(el) {
-			el.addEventListener('click', click => {
+			el.addEventListener('click', () => {
 				let target = $(el.dataset.delete);
 				target.each(el => {
 					if (confirmDialogClose(el)) {
@@ -200,7 +198,9 @@ export function bootstrap() {
 							if (el.nextElementSibling.matches('.backdrop')) {
 								el.nextElementSibling.remove();
 							}
-						} catch(e) {}
+						} catch(e) {
+							return;
+						}
 						el.remove();
 					}
 				});
