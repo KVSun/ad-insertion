@@ -37,6 +37,20 @@ during installation. See [Windows Environment Extension](https://technet.microso
 - MySQL
 - GPG (GPG4Win)
 
+## Git Hooks
+Add these script in `/.git/hooks/` to automate building on pulls and testing on pushes
+- `pre-push`
+```
+#!/bin/sh
+npm test
+```
+- `post-merge`
+```
+#!/bin/sh
+git submodule update --init --recursive
+npm run build:all
+```
+
 ## PHP
 This project uses PHP's native autoloader [`spl_autoload`](https://secure.php.net/manual/en/function.spl-autoload.php), which is configured via `.travis.yml` and `.htaccess` environment variables. Apache will automatically include the autoloader script using `php_value auto_prepend_file`, but since this uses relative paths, it will only work correctly in the project's root directory. To use in other directories, place a `.htaccess` and set the relative path accordingly.
 
