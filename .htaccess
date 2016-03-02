@@ -14,6 +14,7 @@ Options -Indexes +SymLinksIfOwnerMatch
 		SetEnv AUTOLOAD_DIR classes
 		SetEnv AUTOLOAD_EXTS .php
 		SetEnv AUTOLOAD_FUNC spl_autoload
+		SetEnv AUTOLOAD_SCRIPT ./autoloader.php
 	</IfModule>
 </IfModule>
 <IfModule !php5_module>
