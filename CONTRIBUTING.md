@@ -1,6 +1,9 @@
 # Contributing to the project
 **Table of Contents**
 - [General](#general)
+- [Requirements](#requirements)
+- [Dev Requirements](#dev-requirements)
+- [Windows developer issues](#windows-issues)
 - [PHP Contributions](#php)
 - [JavaScript Contributions](#javascript)
 - [CSS Contributions](#css)
@@ -15,11 +18,44 @@ Write access to the GitHub repository is restricted, so make a fork and clone th
 
 **Always pull from `upstream master` prior to sending pull-requests.**
 
+## Requirements
+- [Apache](https://httpd.apache.org/)
+- [PHP](https://secure.php.net/)
+- [MySQL](https://dev.mysql.com/) or [MariaDB](https://mariadb.org/)
+
+## Dev Requirements
+- [Git](https://www.git-scm.com/download/)
+- [Node/NPM](https://nodejs.org/en/)
+
+## Windows issues
+> This project requires several command line tools which require installation and
+some configuration on Windows. The following will need to be added to your `PATH`
+in order to be functional. "Git Shell" & "Git Bash" that comes with GitHub Desktop
+or Git GUI are fairly usable so long as you select "Use Windows' default console window"
+during installation. See [Windows Environment Extension](https://technet.microsoft.com/en-us/library/cc770493.aspx)
+
+- PHP
+- Node
+- Git
+- MySQL
+- GPG (GPG4Win)
+
 ## PHP
 This project uses PHP's native autoloader [`spl_autoload`](https://secure.php.net/manual/en/function.spl-autoload.php), which is configured via `.travis.yml` and `.htaccess` environment variables. Apache will automatically include the autoloader script using `php_value auto_prepend_file`, but since this uses relative paths, it will only work correctly in the project's root directory. To use in other directories, place a `.htaccess` and set the relative path accordingly.
 
+All pull requests **MUST** pass `php -l` linting, not raise any `E_STRICT` errors
+when run, avoid usage or global variables, and not declare any constants or functions
+in the global namespaces. All declared constants and functions must be in a file
+whose namespace is set according to its path, relative to `DOCUMENT_ROOT`.
+
 ## JavaScript
 Due to Content-Security-Policy, use of `eval` and inline scripts are **prohibited**. Further, this project uses ECMAScript 2015  [modules](http://exploringjs.com/es6/ch_modules.html), so be sure to familiarize yourself with the syntax.
+
+All JavaScript **MUST** pass Eslint according to the rules defined in `.eslintrc.json`
+and have an extension of `.es6`.
+Since this project minifies and packages all JavaScript using Babel & Webpack, with
+the exception of `custom.es6`, all script **MUST NOT** execute any code, but only
+import/export functions, classes, etc.
 
 ![JavaScript sample](https://i.imgur.com/Ac0fKZu.png)
 
@@ -58,3 +94,5 @@ NPM also has a `postinstall` script which will automatically install and update
 - [Babel](https://babeljs.io/)
 - [Webpack](https://webpack.github.io/)
 - [ESLint](http://eslint.org/)
+- [svgo](https://github.com/svg/svgo)
+- [svg-sprite-generator](https://github.com/frexy/svg-sprite-generator)
