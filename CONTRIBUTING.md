@@ -42,6 +42,13 @@ Add these script in `/.git/hooks/` to automate building on pulls and testing on 
 - `pre-push`
 ```
 #!/bin/sh
+export MIN_PHP_VERSION="5.5"
+export AUTOLOAD_DIR="classes"
+export AUTOLOAD_EXTS=".php"
+export AUTOLOAD_FUNC="spl_autoload"
+export AUTOLOAD_SCRIPT="./autoloader.php"
+export COMPONENTS_DIR="components"
+export CONFIG_DIR="config"
 npm test
 ```
 - `post-merge`
