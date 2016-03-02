@@ -39,7 +39,7 @@ during installation. See [Windows Environment Extension](https://technet.microso
 
 ## Git Hooks
 Add these script in `/.git/hooks/` to automate building on pulls and testing on pushes
-- `pre-push`
+- `pre-push` *Causes major delay while tests are running and has issues on GitHub Desktop*
 ```
 #!/bin/sh
 export MIN_PHP_VERSION="5.5"
