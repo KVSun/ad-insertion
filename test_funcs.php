@@ -42,6 +42,10 @@ function get_scripts($dir = __DIR__)
  */
 function lint_scripts_recursive($dir = __DIR__)
 {
-	array_map(__NAMESPACE__ .  '\\lint_script', get_scripts($dir));
+	static $funcs;
+	if (is_null($funcs)) {
+		$funcs = \shgysk8zer0\Core\NamespacedFunction::load(__NAMESPACE__);
+	}
+	array_map($funcs->lint_script, get_scripts($dir));
 	array_map(__FUNCTION__, get_dirs($dir));
 }

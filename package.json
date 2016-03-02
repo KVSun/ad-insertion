@@ -30,7 +30,7 @@
     "build:js": "webpack",
     "build:icons": "php svgsprites.php",
     "build:all": "npm run build:css && npm run build:js && npm run build:icons",
-    "lint:js": "eslint  --ext .es6 --fix .",
+    "lint:js": "eslint  --ext .es6 .",
     "lint:php": "php unit.php",
     "update": "git submodule update --init --recursive",
     "test": "npm run lint:php && npm run lint:js",
