@@ -7,7 +7,8 @@
 - [Apache](https://httpd.apache.org/)
 - [PHP](https://secure.php.net/)
 - [MySQL](https://dev.mysql.com/) or [MariaDB](https://mariadb.org/)
-
+- [Node/NPM](https://nodejs.org/en/)
+- [Git](https://www.git-scm.com/download/)
 
 **Update using:**
 
@@ -41,14 +42,3 @@
 - [ESLint](http://eslint.org/)
 - [svgo](https://github.com/svg/svgo)
 - [svg-sprite-generator](https://github.com/frexy/svg-sprite-generator)
-
-## NPM scripts
-**Bundling/minifying/combining resoures**
-
-- **JavaScript** - `npm run build:js`
-- **CSS** -  `npm run build:css`
-- **Icons** - `npm run build:icons`
-- **Everything** - `npm run build:all`
-```
-npm install
-```

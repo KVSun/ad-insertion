@@ -2,7 +2,6 @@
 **Table of Contents**
 - [General](#general)
 - [Requirements](#requirements)
-- [Dev Requirements](#dev-requirements)
 - [Windows developer issues](#windows-issues)
 - [PHP Contributions](#php)
 - [JavaScript Contributions](#javascript)
@@ -22,10 +21,8 @@ Write access to the GitHub repository is restricted, so make a fork and clone th
 - [Apache](https://httpd.apache.org/)
 - [PHP](https://secure.php.net/)
 - [MySQL](https://dev.mysql.com/) or [MariaDB](https://mariadb.org/)
-
-## Dev Requirements
-- [Git](https://www.git-scm.com/download/)
 - [Node/NPM](https://nodejs.org/en/)
+- [Git](https://www.git-scm.com/download/)
 
 ## Windows issues
 > This project requires several command line tools which require installation and
