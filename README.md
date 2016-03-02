@@ -2,39 +2,24 @@
 [![Build Status](https://travis-ci.org/KVSun/ad-insertion.svg?branch=master)](https://travis-ci.org/KVSun/ad-insertion)
 [![Gitter](https://badges.gitter.im/KVSun/ad-insertion.svg)](https://gitter.im/KVSun/ad-insertion)
 - - -
-## Contributing
-Write access to the GitHub repository is restricted, so make a fork and clone that. All work should be done on its own branch, named according to the issue number (*e.g. `42` or `bug/23`*). When you are finished with your work, push your feature branch to your fork, preserving branch name (*not to master*), and create a pull request.
 
-This project uses several submodules, so please be sure to keep everything updated and not make changes to any submodules (*unless you are contributing directly to those projects*).
+## Requirements
+- [Apache](https://httpd.apache.org/)
+- [PHP](https://secure.php.net/)
+- [MySQL](https://dev.mysql.com/) or [MariaDB](https://mariadb.org/)
+- [Node/NPM](https://nodejs.org/en/)
+- [Git](https://www.git-scm.com/download/)
 
 **Update using:**
 
 - `git pull upstream master`  
 - `git submodule update --init --recursive`
-
-**Bundle/package/minify resources using:**
-
-*Please see NPM scripts if you're using Node, as alternative and easier methods are provided via scripts*
-- **JavaScript** - `webpack`
-- **CSS** - `myth stylesheets/styles/import.css -c stylesheets/styles/styles.css`
+- `npm run build:all`
 
 ## Contact
 - [Issues](https://github.com/KVSun/ad-insertion/issues/)
 - [Chat](https://gitter.im/KVSun/ad-insertion)
 - [Email](mailto:editor@kvsun.com)
-
-## PHP developer notes
-> This project uses PHP's native [autoloader](https://secure.php.net/manual/en/function.spl-autoload.php), which is configured via `.travis.yml` and `.htaccess` environment variables. Apache will automatically include the autoloader script using `php_value auto_prepend_file`, but since this uses relative paths, it will only work correctly in the project's root directory. To use in other directories, place a `.htaccess` and set the relative path accordingly.
-
-## JavaScript developer notes
-> Due to Content-Security-Policy, use of `eval` and inline scripts are **prohibited**. Further, this project uses ECMAScript 2015  [modules](http://exploringjs.com/es6/ch_modules.html), so be sure to familiarize yourself with the syntax.
-
-![JavaScript sample](https://i.imgur.com/Ac0fKZu.png)
-
-## CSS developer notes
-> Like in the above, one of the goals of this project is to keep things working natively, which means standardized CSS and JavaScript. Although the features may be new, `import` and `export` in JavaScript, and `@import` and `--var-name: value` are official standards. In the case of CSS, browser support does exist, and so this project will use `@import` and CSS variables in favor of SASS or LESS.
-
-![CSS sample](https://i.imgur.com/j4sC5qv.png)
 
 ## Git submodules
 - [shgysk8zer0/core_api](https://github.com/shgysk8zer0/core_api/)
@@ -49,11 +34,11 @@ This project uses several submodules, so please be sure to keep everything updat
 - [necolas/normalize.css](https://github.com/necolas/normalize.css/)
 
 ## Dev dependencies
+*or Node modules*
+
 - [Myth](http://www.myth.io/)
 - [Babel](https://babeljs.io/)
 - [Webpack](https://webpack.github.io/)
 - [ESLint](http://eslint.org/)
-
-```
-npm install "myth" "babel-loader" "babel-core" "babel-preset-es2015" "webpack" "eslint"
-```
+- [svgo](https://github.com/svg/svgo)
+- [svg-sprite-generator](https://github.com/frexy/svg-sprite-generator)
