@@ -1,0 +1,17 @@
+.disabled {
+	pointer-events: none;
+}
+button, [role="button"] {
+	transition: filter 300ms;
+}
+.disabled[role="button"], button:disabled {
+	cursor: progress;
+	background-image: linear-gradient(var(--highlight-color), var(--primary-color));
+	filter: blur(0.17em) grayscale(50%) opacity(80%);
+}
+a:not([role="button"]).disabled {
+	color: inherit;
+}
+:disabled svg, .disabled svg {
+	fill: #333;
+}
