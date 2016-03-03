@@ -43,9 +43,7 @@ function toggleFullScreen(){
 export const watcher = {
 	childList: function() {
 		$(this.addedNodes).bootstrap();
-	},
-	removedNodes: function() {
-		if (Array.from(this.removedNodes).some(node => node.tagName === 'DIALOG')) {
+		if ($(this.removedNodes).some(node => node.tagName === 'DIALOG')) {
 			document.body.removeEventListener('click', closeOnOutsideClick);
 			document.body.removeEventListener('keypress', closeOnEscapeKey);
 		}
