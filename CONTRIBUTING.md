@@ -39,6 +39,12 @@ during installation. See [Windows Environment Extension](https://technet.microso
 
 ## Git Hooks
 Add these script in `/.git/hooks/` to automate building on pulls and testing on pushes
+- `post-merge`
+```
+#!/bin/sh
+git submodule update --init --recursive
+npm run build:all
+```
 - `pre-push` *Causes major delay while tests are running and has issues on GitHub Desktop*
 ```
 #!/bin/sh
@@ -51,12 +57,9 @@ export COMPONENTS_DIR="components"
 export CONFIG_DIR="config"
 npm test
 ```
-- `post-merge`
-```
-#!/bin/sh
-git submodule update --init --recursive
-npm run build:all
-```
+
+You should also copy or rename `.git/hooks/pre-commit.sample` to `.git/hooks.pre-commit`
+to ensure that any filenames are valid across all OS's.
 
 ## PHP
 This project uses PHP's native autoloader [`spl_autoload`](https://secure.php.net/manual/en/function.spl-autoload.php), which is configured via `.travis.yml` and `.htaccess` environment variables. Apache will automatically include the autoloader script using `php_value auto_prepend_file`, but since this uses relative paths, it will only work correctly in the project's root directory. To use in other directories, place a `.htaccess` and set the relative path accordingly.
