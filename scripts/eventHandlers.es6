@@ -87,6 +87,11 @@ function matchInput(input) {
 
 function getLink(click) {
 	click.preventDefault();
+	if (this.classList.contains('disabled')) {
+		return;
+	} else {
+		this.classList.add('disabled');
+	}
 	let url = new URL(this.href, location.origin);
 	let headers = new Headers();
 	headers.set('Accept', 'application/json');
@@ -96,7 +101,13 @@ function getLink(click) {
 	fetch(url, {
 		method: 'GET',
 		headers
-	}).then(updateFetchHistory).then(parseResponse).then(handleJSON).catch(reportError);
+	}).then(updateFetchHistory).then(parseResponse).then(json => {
+		handleJSON(json);
+		this.classList.remove('disabled');
+	}).catch(error => {
+		this.classList.remove('disabled');
+		reportError(error);
+	});
 }
 
 function toggleDetails() {
