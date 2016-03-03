@@ -148,16 +148,14 @@ export function autoCloseDialog(dialog) {
 			try {
 				if (dialog.nextElementSibling.matches('.backdrop')) {
 					dialog.nextElementSibling.remove();
+					dialog.remove();
 				}
 			} catch(e) {
-				return;
+				dialog.remove();
 			}
-			dialog.remove();
 		} else {
 			dialog.close();
 		}
-		document.body.removeEventListener('click', closeOnOutsideClick);
-		document.body.removeEventListener('keypress', closeOnEscapeKey);
 	}
 }
 
