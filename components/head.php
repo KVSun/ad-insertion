@@ -3,6 +3,8 @@ namespace Components\Head;
 function loadHead()
 {
 	$dom = \shgysk8zer0\DOM\HTML::getInstance();
+	$url = \shgysk8zer0\Core\URL::getInstance();
+	unset($url->path, $url->query, $url->fragment, $url->user, $url->pass);
 	$frag = $dom->createDocumentFragment();
 
 	$frag('title', 'Ad Insertion');
@@ -22,6 +24,7 @@ function loadHead()
 		'href' => 'images/icons.svg',
 		'type' => 'image/svg+xml'
 	]);
+	$frag('base', null, ['href' => $url]);
 	$frag('script', null, [
 		'type' => 'application/javascript',
 		'src' => 'scripts/custom.js',
