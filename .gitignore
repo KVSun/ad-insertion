@@ -3,6 +3,10 @@
 /node_modules/
 /npm-debug.log
 /config/connect.json
+/scripts/custom.js
+/scripts/custom.js.map
+/stylesheets/styles/styles.css
+/images/icons.svg
 
 #################
 ## Eclipse

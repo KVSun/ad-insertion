@@ -32,9 +32,10 @@
     "build:all": "npm run build:css && npm run build:js && npm run build:icons",
     "lint:js": "eslint  --ext .es6 .",
     "lint:php": "php unit.php",
-    "update": "git submodule update --init --recursive",
+    "update": "git submodule update --init --recursive && npm run build:all",
     "test": "npm run lint:php && npm run lint:js",
-    "postinstall": "npm run update"
+	"git:hooks": "cp .git/hooks/pre-commit.sample .git/hooks/pre-commit && echo #!/bin/sh> .git/hooks/post-merge && echo npm run update>> .git/hooks/post-merge",
+    "postinstall": "npm run git:hooks && npm run update"
   },
   "devDependencies": {
     "babel-core": "^6.6.0",

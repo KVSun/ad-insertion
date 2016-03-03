@@ -11,7 +11,13 @@
 - [Git](https://www.git-scm.com/download/)
 
 **Update using:**
-
+Add the following as `.git/hooks/post-merge`
+```
+#!/bin/sh
+git submodule update --init --recursive
+npm run build:all
+```
+or run manually
 - `git pull upstream master`  
 - `git submodule update --init --recursive`
 - `npm run build:all`
