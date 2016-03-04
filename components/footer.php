@@ -35,6 +35,13 @@ function loadFooter()
 		'role' => 'button'
 	])->import(DOM\SVG::useIcon('smiley', $size));
 
+	$params->load = 'circulation';
+	$footer->append('a', null, [
+		'href' => "?{$params}",
+		'title' => 'Circulation',
+		'role' => 'button'
+	])->import(DOM\SVG::useIcon('credit-card', $size));
+
 	return $footer;
 }
 return loadFooter();
