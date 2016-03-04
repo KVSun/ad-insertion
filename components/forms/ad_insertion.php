@@ -1,8 +1,11 @@
 <?php
 namespace Components\Forms\Ad_Insertion;
+
+use \shgysk8zer0\DOM as DOM;
 function loadAdInsertion()
 {
-	$form = \shgysk8zer0\DOM\HTML::getinstance()->createElement('form');
+	$size = ['width' => 30, 'height' => 30];
+	$form = DOM\HTML::getinstance()->createElement('form');
 	$form->name = basename(__FILE__, '.php');
 	$form->action = '.';
 	$form->method = 'POST';
@@ -241,17 +244,11 @@ function loadAdInsertion()
 	$form->append('button', null, [
 		'type' => 'submit',
 		'title' => 'Submit'
-		])->import(\shgysk8zer0\DOM\SVG::useIcon('check', [
-			'height' => 30,
-			'width' => 30
-		]));
+		])->import(DOM\SVG::useIcon('check', $size));
 	$form->append('button', null, [
 		'type' => 'reset',
 		'title' => 'Reset'
-		])->import(\shgysk8zer0\DOM\SVG::useIcon('x', [
-			'height' => 30,
-			'width' => 30
-		]));
+		])->import(DOM\SVG::useIcon('x', $size));
 	$form->append('hr');
 	return $form;
 }
