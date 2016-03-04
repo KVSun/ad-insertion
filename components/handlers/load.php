@@ -38,6 +38,10 @@ function load_request($request)
 			return load_form('ad_insertion');
 			break;
 
+		case 'login':
+			return load_form('login');
+			break;
+
 		default:
 			\shgysk8zer0\Core\Console::getInstance()->error(sprintf(ERROR_FORMAT, $request));
 			return $resp->notify(
