@@ -15,9 +15,14 @@ function loadDialog()
 	$dialog->append('br');
 
 	$dialog->append('a', null, [
-		'href' => "mailto:{$package->author->email}",
+		'href' => "mailto:{$package->author->email}?Subject={$package->name}",
 		'title' => 'Email'
 	])->import(SVG::useIcon('mail-read', $size), true);
+
+	$dialog->append('a', null, [
+		'href' => 'tel:+17603793667',
+		'title' => 'Call'
+	])->import(SVG::useIcon('device-mobile', $size));
 
 	$dialog->append('a', null, [
 		'href' => 'https://gitter.im/KVSun/ad-insertion',
