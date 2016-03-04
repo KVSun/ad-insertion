@@ -20,7 +20,6 @@ function loadFooter()
 	])->import(\shgysk8zer0\DOM\SVG::useIcon('person', $size));
 
 	$footer->append('a', 'Ad Insertion', ['href' => "?{$params}"]);
-	$params->load = 'circulation';
 	return $footer;
 }
 return loadFooter();
