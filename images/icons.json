@@ -4,5 +4,7 @@
 	"mail-read": "images/octicons/svg/mail-read.svg",
 	"comment": "images/octicons/svg/comment.svg",
 	"mark-github": "images/octicons/svg/mark-github.svg",
-	"issue-opened": "images/octicons/svg/issue-opened.svg"
+	"issue-opened": "images/octicons/svg/issue-opened.svg",
+	"check": "images/octicons/svg/check.svg",
+	"x": "images/octicons/svg/x.svg"
 }

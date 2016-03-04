@@ -238,8 +238,20 @@ function loadAdInsertion()
 	]);
 	unset($info);
 
-	$form->append('button', 'Submit', ['type' => 'submit']);
-	$form->append('button', 'Reset', ['type' => 'reset']);
+	$form->append('button', null, [
+		'type' => 'submit',
+		'title' => 'Submit'
+		])->import(\shgysk8zer0\DOM\SVG::useIcon('check', [
+			'height' => 30,
+			'width' => 30
+		]));
+	$form->append('button', null, [
+		'type' => 'reset',
+		'title' => 'Reset'
+		])->import(\shgysk8zer0\DOM\SVG::useIcon('x', [
+			'height' => 30,
+			'width' => 30
+		]));
 	$form->append('hr');
 	return $form;
 }
