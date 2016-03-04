@@ -196,10 +196,10 @@ export function bootstrap() {
 							if (el.nextElementSibling.matches('.backdrop')) {
 								el.nextElementSibling.remove();
 							}
+							el.remove();
 						} catch(e) {
-							return;
+							el.remove();
 						}
-						el.remove();
 					}
 				});
 			});
