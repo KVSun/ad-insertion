@@ -2,6 +2,23 @@
 namespace Components\Handlers\Load;
 const ERROR_FORMAT = 'Do not know how to load "%s"';
 
+function load_form($name)
+{
+	$name   = str_replace('-', '_', strtolower($name));
+	$dom    = \shgysk8zer0\DOM\HTML::getInstance();
+	$resp   = \shgysk8zer0\Core\JSON_Response::getInstance();
+	$dialog = $dom->body->append('dialog', null, ['id' => "{$name}-dialog"]);
+
+	$dialog->append('button', null, ['data-delete' => "#{$dialog->id}"]);
+	$dialog->append('button', null, [
+		'type' => 'button',
+		'data-fullscreen' => "#{$dialog->id}"
+	]);
+	$dialog->append('br');
+	$dialog("forms/{$name}");
+	return $resp->append('body', $dialog)->showModal("#{$dialog->id}");
+}
+
 /**
  * [load_request description]
  * @param  [type] $request [description]
@@ -18,15 +35,7 @@ function load_request($request)
 			break;
 
 		case 'ad_insertion':
-			$dialog = $dom->body->append('dialog', null, ['id' => 'ad-insertion-dialog']);
-			$dialog->append('button', null, ['data-delete' => "#{$dialog->id}"]);
-			$dialog->append('button', null, [
-				'type' => 'button',
-				'data-fullscreen' => "#{$dialog->id}"
-			]);
-			$dialog->append('br');
-			$dialog('forms/ad_insertion');
-			return $resp->append('body', $dialog)->showModal("#{$dialog->id}");
+			return load_form('ad_insertion');
 			break;
 
 		default:
