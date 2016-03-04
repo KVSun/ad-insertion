@@ -15,7 +15,6 @@ function loadFooter()
 		'role' => 'button'
 	])->import(DOM\SVG::useIcon('info', $size));
 
-	$params->load = 'ad_insertion';
 	$contact = $footer('contact_dialog')[0];
 	$footer->append('button', null, [
 		'title' => 'Contact info',
@@ -29,6 +28,7 @@ function loadFooter()
 		'role' => 'button'
 	])->import(DOM\SVG::useIcon('sign-in', $size));
 
+	$params->load = 'ad_insertion';
 	$footer->append('a', null, [
 		'href' => "?{$params}",
 		'title' => 'Ad Insertion',
