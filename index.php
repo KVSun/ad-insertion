@@ -1,14 +1,18 @@
 <?php
 namespace Index;
-\shgysk8zer0\Core\Console::getInstance()->asErrorHandler()->asExceptionHandler();
-\shgysk8zer0\DOM\HTMLElement::$import_path = realpath(getenv('COMPONENTS_DIR'));
+use \shgysk8zer0\Core as Core;
+use \shgysk8zer0\Core_API as API;
+use \shgysk8zer0\DOM as DOM;
 
-function build_head(\DOMElement $head)
+Core\Console::getInstance()->asErrorHandler()->asExceptionHandler();
+DOM\HTMLElement::$import_path = realpath(getenv('COMPONENTS_DIR'));
+
+function build_head(\DOMElement &$head)
 {
 	$head('head');
 }
 
-function build_body(\DOMElement $body)
+function build_body(\DOMElement &$body)
 {
 	$body->parentNode->class = 'no-js';
 	$body->class = 'flex column';
@@ -17,18 +21,19 @@ function build_body(\DOMElement $body)
 
 function init()
 {
-	$url = \shgysk8zer0\Core\URL::getInstance();
-	$headers = \shgysk8zer0\Core\Headers::getInstance();
-	$dom = \shgysk8zer0\DOM\HTML::getInstance();
+	$headers = Core\Headers::getInstance();
+	$dom     = DOM\HTML::getInstance();
+
 	if (in_array('text/html', explode(',', $headers->accept))) {
 		build_head($dom->head);
 		build_body($dom->body);
 		return $dom;
 	} elseif ($headers->accept === 'application/json' and !empty($_REQUEST)) {
-		return require './components/handlers/request.php';
+		require_once './components/handlers/request.php';
+		return \Components\Handlers\Request\handle($_REQUEST);
 	} else {
-		http_response_code(\shgysk8zer0\Core_API\Abstracts\HTTPStatusCodes::BAD_REQUEST);
+		http_response_code(API\Abstracts\HTTPStatusCodes::BAD_REQUEST);
 	}
 }
-\shgysk8zer0\Core\Console::getInstance()->sendLogHeader();
+Core\Console::getInstance()->sendLogHeader();
 exit(init());
