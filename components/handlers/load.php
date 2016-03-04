@@ -42,6 +42,10 @@ function load_request($request)
 			return load_form('login');
 			break;
 
+		case 'circulation':
+			return load_form('circulation');
+			break;
+
 		default:
 			\shgysk8zer0\Core\Console::getInstance()->error(sprintf(ERROR_FORMAT, $request));
 			return $resp->notify(
