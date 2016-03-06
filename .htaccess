@@ -284,15 +284,15 @@ FileETag None
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-l
-	RewriteRule . ./index.html [L]
+	RewriteRule . ./index.php [L]
 </IfModule>
 
 # ------------------------------------------------------------------------------
 # | Error pages		  													 	 |
 # ------------------------------------------------------------------------------
-ErrorDocument 400 /index.html
-ErrorDocument 401 /index.html
-ErrorDocument 402 /index.html
-ErrorDocument 403 /index.html
-ErrorDocument 404 /index.html
-ErrorDocument 500 /index.html
+ErrorDocument 400 /index.php
+ErrorDocument 401 /index.php
+ErrorDocument 402 /index.php
+ErrorDocument 403 /index.php
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php
