@@ -1,6 +1,6 @@
 <?php
 namespace Components\Header;
-function loadHeader()
+return function()
 {
 	$header = \shgysk8zer0\DOM\HTML::getInstance()->createElement('header');
 	$header->append('h1', 'KV Sun Ad Insertion', [
@@ -12,5 +12,4 @@ function loadHeader()
 		'height' => 90
 	]);
 	return $header;
-}
-return loadHeader();
+};

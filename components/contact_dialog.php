@@ -1,7 +1,7 @@
 <?php
 namespace Components\Contact_Dialog;
 use \shgysk8zer0\DOM\SVG as SVG;
-function loadDialog()
+return function()
 {
 	$size = ['height' => 60, 'width' => 60];
 	$package = json_decode(file_get_contents('package.json'));
@@ -42,5 +42,4 @@ function loadDialog()
 		'title' => 'Open Issue'
 	])->import(SVG::useIcon('issue-opened', $size), true);
 	return $dialog;
-}
-return loadDialog();
+};

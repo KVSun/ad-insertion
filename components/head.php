@@ -1,6 +1,6 @@
 <?php
 namespace Components\Head;
-function loadHead()
+return function()
 {
 	$dom = \shgysk8zer0\DOM\HTML::getInstance();
 	$url = \shgysk8zer0\Core\URL::getInstance();
@@ -35,5 +35,4 @@ function loadHead()
 		'content' => 'An ad insertion form for the Kern Valley Sun'
 	]);
 	return $frag;
-}
-return loadHead();
+};

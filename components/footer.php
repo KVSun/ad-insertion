@@ -2,7 +2,7 @@
 namespace Components\Footer;
 use \shgysk8zer0\DOM as DOM;
 
-function loadFooter()
+return function()
 {
 	$size = ['height' => 50, 'width' => 50];
 	$params = new \shgysk8zer0\Core\URLSearchParams();
@@ -43,5 +43,4 @@ function loadFooter()
 	])->import(DOM\SVG::useIcon('credit-card', $size));
 
 	return $footer;
-}
-return loadFooter();
+};

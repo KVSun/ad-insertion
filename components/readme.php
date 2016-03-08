@@ -6,7 +6,7 @@ function get_readme()
 	$parsedown = new \Parsedown\Parsedown();
 	return $parsedown->text(file_get_contents(README));
 }
-function loadReadme()
+return function()
 {
 	$readme = \shgysk8zer0\DOM\HTML::getInstance()->createElement('dialog');
 	$readme->id = 'README-dailog';
@@ -21,5 +21,4 @@ function loadReadme()
 	$readme->append('br');
 	$readme->importHTML(get_readme());
 	return $readme;
-}
-return loadReadme();
+};

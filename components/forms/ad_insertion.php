@@ -2,7 +2,7 @@
 namespace Components\Forms\Ad_Insertion;
 
 use \shgysk8zer0\DOM as DOM;
-function loadAdInsertion()
+return function()
 {
 	$size = ['width' => 30, 'height' => 30];
 	$form = DOM\HTML::getinstance()->createElement('form');
@@ -251,5 +251,4 @@ function loadAdInsertion()
 		])->import(DOM\SVG::useIcon('x', $size));
 	$form->append('hr');
 	return $form;
-}
-return loadAdInsertion();
+};

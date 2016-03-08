@@ -4,7 +4,7 @@ namespace Components\Forms\Circulation;
 use \shgysk8zer0\DOM as DOM;
 use \shgysk8zer0\Core_API\Abstracts\RegExp as Pattern;
 
-function build()
+return function()
 {
 	$size = ['width' => 30, 'height' => '30'];
 	$form = DOM\HTML::getInstance()->createElement('form');
@@ -128,6 +128,4 @@ function build()
 	])->import(DOM\SVG::useIcon('x', $size));
 
 	return $form;
-}
-
-return build();
+};

@@ -1,7 +1,7 @@
 <?php
 namespace Components\Forms\Login;
 
-function buildForm()
+return function()
 {
 	$form = \shgysk8zer0\DOM\HTML::getInstance()->createElement('form');
 	$form->name = basename(__FILE__, '.php');
@@ -40,5 +40,4 @@ function buildForm()
 		'width' => 30
 	]));
 	return $form;
-}
-return buildForm();
+};

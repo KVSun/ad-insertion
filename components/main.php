@@ -46,7 +46,7 @@ function extension_not_loaded($name)
 	return ! extension_loaded($name);
 }
 
-function loadMain()
+return function()
 {
 	$main = \shgysk8zer0\DOM\HTML::getInstance()->createElement('main');
 	$extensions = array(
@@ -66,5 +66,4 @@ function loadMain()
 	$extensions = array_filter($extensions, '\\' . __NAMESPACE__ . '\\extension_not_loaded');
 	listExtenions($extensions, $main);
 	return $main;
-}
-return loadMain();
+};
