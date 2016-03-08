@@ -56,4 +56,3 @@ function load_request($request)
 	}
 
 }
-return load_request($_REQUEST['load']);
