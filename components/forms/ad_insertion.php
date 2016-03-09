@@ -3,15 +3,32 @@ namespace Components\Forms\Ad_Insertion;
 
 use \shgysk8zer0\DOM as DOM;
 use \shgysk8zer0\Core as Core;
+use \shgysk8zer0\Core_API\Abstracts\RegExp as Pattern;
+
 return function()
 {
 	$date = new Core\DateTime();
 	$date->format = 'Y-m-d';
 	$size = ['width' => 30, 'height' => 30];
-	$form = DOM\HTML::getinstance()->createElement('form');
+
+	$dom = DOM\HTML::getinstance();
+	$functions = Core\NamespacedFunction::load('\Functions');
+
+	$form = $dom->createElement('form');
 	$form->name = basename(__FILE__, '.php');
 	$form->action = '.';
 	$form->method = 'POST';
+
+	$cities = array_reduce([
+		'Lake Isabella',
+		'Wofford Heights',
+		'Bodfish',
+		'Kernville',
+		'South Lake',
+		'Weldon',
+		'Bakersfield'
+	], $functions->add_datalist_item, $form->append('datalist', null, ['id' => 'city-list']));
+
 	$section = $form->append('fieldset', null, ['form' => $form->name]);
 	$section->append('legend', 'Section');
 	$section->append('label', 'Date: ', ['for' => 'ad-insertion[date]']);
@@ -22,6 +39,7 @@ return function()
 		'placeholder' => 'YYYY-mm-dd',
 		'min' => $date,
 		'value' => $date,
+		'pattern' => Pattern::DATE,
 		'require' => true
 	]);
 	$date->format = 'Y-\WW';
@@ -105,6 +123,7 @@ return function()
 		'name' => 'ad-insertion[phone]',
 		'id' => 'ad-insertion[phone]',
 		'placeholder' => '123456789',
+		'pattern' => Pattern::TEL,
 		'required' => ''
 	]);
 	$contact->append('br');
@@ -115,6 +134,16 @@ return function()
 		'id' => 'ad-insertion[address]',
 		'pattern' => '[\w \.]+',
 		'placeholder' => '123 Easy St.',
+		'required' => ''
+	]);
+	$contact->append('label', 'City', ['for' => 'ad-insertion[city]']);
+	$contact->append('input', null, [
+		'type' => 'text',
+		'name' => 'ad-insertion[city]',
+		'id' => 'ad-insertion[city]',
+		'list' => 'city-list',
+		'placeholder' => 'City Name',
+		'pattern' => '[A-z \.]+',
 		'required' => ''
 	]);
 	unset($contact);

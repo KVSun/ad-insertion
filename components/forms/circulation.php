@@ -10,10 +10,21 @@ return function()
 	$date = new Core\DateTime();
 	$date->format = 'Y-m-d';
 	$size = ['width' => 30, 'height' => '30'];
+	$functions = Core\NamespacedFunction::load('\Functions');
 	$form = DOM\HTML::getInstance()->createElement('form');
 	$form->name = basename(__FILE__, '.php');
 	$form->method = 'POST';
 	$form->action = '.';
+
+	$cities = array_reduce([
+		'Lake Isabella',
+		'Wofford Heights',
+		'Bodfish',
+		'Kernville',
+		'South Lake',
+		'Weldon',
+		'Bakersfield'
+	], $functions->add_datalist_item, $form->append('datalist', null, ['id' => 'city-list']));
 
 	$contact = $form->append('fieldset');
 	$contact->append('Legend', 'Contact Info');
@@ -85,6 +96,7 @@ return function()
 		'type'        => 'text',
 		'name'        => "{$form->name}[address][city]",
 		'id'          => "{$form->name}[address][city]",
+		'list'        => $cities->id,
 		'placeholder' => 'Lake Isabella',
 		'pattern'     => '[A-z \.]+',
 		'required'    => ''
