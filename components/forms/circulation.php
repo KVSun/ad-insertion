@@ -3,9 +3,12 @@ namespace Components\Forms\Circulation;
 
 use \shgysk8zer0\DOM as DOM;
 use \shgysk8zer0\Core_API\Abstracts\RegExp as Pattern;
+use \shgysk8zer0\Core as Core;
 
 return function()
 {
+	$date = new Core\DateTime();
+	$date->format = 'Y-m-d';
 	$size = ['width' => 30, 'height' => '30'];
 	$form = DOM\HTML::getInstance()->createElement('form');
 	$form->name = basename(__FILE__, '.php');
@@ -116,6 +119,19 @@ return function()
 	unset($address, $label, $input);
 
 	$form->append('hr');
+
+	$label = $form->append('label', 'Expiration');
+	$input = $form->append('input', null, [
+		'type' => 'date',
+		'name' => "{$form->name}[expiration]",
+		'id' => "{$form->name}[expiration]",
+		'pattern' => Pattern::DATE,
+		'placeholder' => 'YYYY-mm-dd',
+		'min' => $date,
+		'value' => $date->modify('+1 year'),
+		'required' => ''
+	]);
+	$label->for = $input->id;
 
 	$form->append('button', null, [
 		'type'  => 'submit',
