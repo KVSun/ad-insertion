@@ -2,8 +2,11 @@
 namespace Components\Forms\Ad_Insertion;
 
 use \shgysk8zer0\DOM as DOM;
+use \shgysk8zer0\Core as Core;
 return function()
 {
+	$date = new Core\DateTime();
+	$date->format = 'Y-m-d';
 	$size = ['width' => 30, 'height' => 30];
 	$form = DOM\HTML::getinstance()->createElement('form');
 	$form->name = basename(__FILE__, '.php');
@@ -17,8 +20,11 @@ return function()
 		'name' => 'ad-insertion[date]',
 		'id' => 'ad-insertion[date]',
 		'placeholder' => 'YYYY-mm-dd',
+		'min' => $date,
+		'value' => $date,
 		'require' => true
 	]);
+	$date->format = 'Y-\WW';
 	$section->append('label', 'By: ', ['for' => 'ad-insertion[by]']);
 	$section->append('input', null, [
 		'type' => 'text',
@@ -192,6 +198,8 @@ return function()
 		'name' => 'ad-insertion[run][start]',
 		'id' => 'ad-insertion[run][start]',
 		'placeholder' => 'YYYY-W##',
+		'min' => $date,
+		'value' => $date,
 		'required' => ''
 	]);
 	$charges->append('label', 'To: ', ['for' => 'ad-insertion[run][end]']);
@@ -199,6 +207,8 @@ return function()
 		'type' => 'week',
 		'name' => 'ad-insertion[run][end]',
 		'id' => 'ad-insertion[run][end]',
+		'min' => $date,
+		'value' => $date->modify('+1 week'),
 		'placeholder' => 'YYYY-W##',
 		'required' => ''
 	]);
