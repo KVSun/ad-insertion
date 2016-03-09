@@ -31,253 +31,288 @@ return function()
 
 	$section = $form->append('fieldset', null, ['form' => $form->name]);
 	$section->append('legend', 'Section');
-	$section->append('label', 'Date: ', ['for' => 'ad-insertion[date]']);
-	$section->append('input', null, [
+	$label = $section->append('label', 'Date: ');
+	$input = $section->append('input', null, [
 		'type' => 'date',
-		'name' => 'ad-insertion[date]',
-		'id' => 'ad-insertion[date]',
+		'name' => "{$form->name}[date]",
+		'id' => "{$form->name}[date]",
 		'placeholder' => 'YYYY-mm-dd',
 		'min' => $date,
 		'value' => $date,
 		'pattern' => Pattern::DATE,
 		'require' => true
 	]);
+	$label->for = $input->id;
+
 	$date->format = 'Y-\WW';
-	$section->append('label', 'By: ', ['for' => 'ad-insertion[by]']);
-	$section->append('input', null, [
+	$label = $section->append('label', 'By: ');
+	$input = $section->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[by]',
-		'id' => 'ad-insertion[by]',
+		'name' => "{$form->name}[by]",
+		'id' => "{$form->name}[by]",
 		'pattern' => '[A-z ]+',
 		'placeholder' => 'Your name',
 		'required' => true
 	]);
+	$label->for = $input->id;
 	$section->append('br');
-	$section->append('label', 'A', ['for' => 'ad-insertion[section][a]']);
-	$section->append('input', null, [
+
+	$label = $section->append('label', 'A');
+	$input = $section->append('input', null, [
 		'type' => 'checkbox',
-		'name' => 'ad-insertion[section][a]',
-		'id' => 'ad-insertion[section][a]'
+		'name' => "{$form->name}[section][a]",
+		'id' => "{$form->name}[section][a]"
 	]);
-	$section->append('label', 'B', ['for' => 'ad-insertion[section][b]']);
-	$section->append('input', null, [
+	$label->for = $input->id;
+	$label = $section->append('label', 'B');
+	$input = $section->append('input', null, [
 		'type' => 'checkbox',
-		'name' => 'ad-insertion[section][b]',
-		'id' => 'ad-insertion[section][b]'
+		'name' => "{$form->name}[section][b]",
+		'id' => "{$form->name}[section][b]"
 	]);
-	$section->append('label', 'C', ['for' => 'ad-insertion[section][c]']);
-	$section->append('input', null, [
+	$label->for = $input->id;
+	$label = $section->append('label', 'C');
+	$input =$section->append('input', null, [
 		'type' => 'checkbox',
-		'name' => 'ad-insertion[section][c]',
-		'id' => 'ad-insertion[section][c]'
+		'name' => "{$form->name}[section][c]",
+		'id' => "{$form->name}[section][c]"
 	]);
-	$section->append('label', 'D', ['for' => 'ad-insertion[section][d]']);
-	$section->append('input', null, [
+	$label->for = $input->id;
+	$label = $section->append('label', 'D');
+	$input = $section->append('input', null, [
 		'type' => 'checkbox',
-		'name' => 'ad-insertion[section][d]',
-		'id' => 'ad-insertion[section][d]'
+		'name' => "{$form->name}[section][d]",
+		'id' => "{$form->name}[section][d]"
 	]);
-	$section->append('label',' Classification', ['for' => 'ad-insertion[classification]']);
-	$section->append('input', null, [
+	$label->for = $input->id;
+	$label = $section->append('label',' Classification');
+	$input = $section->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[classification]',
-		'id' => 'ad-insertion[classification]',
+		'name' => "{$form->name}[classification]",
+		'id' => "{$form->name}[classification]",
 		'placeholder' => '???',
 		'required' => true
 	]);
-	$section->append('label', null, [
-		'for' => 'ad-insertion[special-edition]'
+	$label->for = $input->id;
+	$label = $section->append('label', null, [
+		'for' => "{$form->name}[special-edition]"
 	])->append('i', 'Special Edition');
-	$section->append('input', null, [
+	$input = $section->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[special-edition]',
+		'name' => "{$form->name}[special-edition]",
 		'placeholder' => '???',
-		'id' => 'ad-insertion[special-edition]'
+		'id' => "{$form->name}[special-edition]"
 	]);
+	$label->for = $input->id;
 	unset($section);
 
-	$contact = $form->append('fieldset', null, ['for' => 'ad-insertion']);
+	$contact = $form->append('fieldset', null, ['form' => $form->name]);
 	$contact->append('legend', 'Contact Info');
-	$contact->append('label', 'Account name: ', ['for' => 'ad-insertion[acct-name]']);
-	$contact->append('input', null, [
+	$label = $contact->append('label', 'Account name: ');
+	$input = $contact->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[acct-name]',
-		'id' => 'ad-insertion[acct-name]',
+		'name' => "{$form->name}[acct-name]",
+		'id' => "{$form->name}[acct-name]",
 		'pattern' => '[\w ]+',
 		'placeholder' => 'Business name',
 		'required' => ''
 	]);
+	$label->for = $input->id;
 	$contact->append('br');
-	$contact->append('label', 'Contact: ', ['for' => 'ad-insertion[contact]']);
-	$contact->append('input', null, [
+
+	$label = $contact->append('label', 'Contact: ');
+	$input = $contact->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[contact]',
-		'id' => 'ad-insertion[contact]',
+		'name' => "{$form->name}[contact]",
+		'id' => "{$form->name}[contact]",
 		'placeholder' => 'First Last',
 		'pattern' => '[A-z \.]+',
 		'required' => ''
 	]);
-	$contact->append('label', 'Phone: ', ['for' => 'ad-insertion[phone]']);
-	$contact->append('input', null, [
+	$label->for = $input->id;
+	$label = $contact->append('label', 'Phone: ');
+	$input = $contact->append('input', null, [
 		'type' => 'tel',
-		'name' => 'ad-insertion[phone]',
-		'id' => 'ad-insertion[phone]',
+		'name' => "{$form->name}[phone]",
+		'id' => "{$form->name}[phone]",
 		'placeholder' => '123456789',
 		'pattern' => Pattern::TEL,
 		'required' => ''
 	]);
+	$label->for = $input->id;
 	$contact->append('br');
-	$contact->append('label', 'Address: ', ['for' => 'ad-insertion[address]']);
-	$contact->append('input', null, [
+
+	$label = $contact->append('label', 'Address: ');
+	$input = $contact->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[address]',
-		'id' => 'ad-insertion[address]',
+		'name' => "{$form->name}[address]",
+		'id' => "{$form->name}[address]",
 		'pattern' => '[\w \.]+',
 		'placeholder' => '123 Easy St.',
 		'required' => ''
 	]);
-	$contact->append('label', 'City', ['for' => 'ad-insertion[city]']);
-	$contact->append('input', null, [
+	$label->for = $input->id;
+
+	$label = $contact->append('label', 'City');
+	$input = $contact->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[city]',
-		'id' => 'ad-insertion[city]',
+		'name' => "{$form->name}[city]",
+		'id' => "{$form->name}[city]",
 		'list' => 'city-list',
 		'placeholder' => 'City Name',
 		'pattern' => '[A-z \.]+',
 		'required' => ''
 	]);
+	$label->for = $input->id;
 	unset($contact);
 
-	$charges = $form->append('fieldset', null, ['form' => 'ad-insertion']);
+	$charges = $form->append('fieldset', null, ['form' => $form->name]);
 	$charges->append('legend', 'Charges');
-	$charges->append('label', 'Rate: ',['for' => 'ad-insertion[rate]']);
-	$charges->append('input', null, [
+	$label = $charges->append('label', 'Rate: ');
+	$input = $charges->append('input', null, [
 		'type' => 'number',
-		'name' => 'ad-insertion[rate]',
-		'id' => 'ad-insertion[rate]',
+		'name' => "{$form->name}[rate]",
+		'id' => "{$form->name}[rate]",
 		'min' => '0',
 		'step' => 0.01,
 		'value' => '0',
 		'placeholder' => '50.00',
 		'required' => ''
 	]);
-	$charges->append('label', 'Color Rate: ',['for' => 'ad-insertion[color-rate]']);
-	$charges->append('input', null, [
+	$label->for = $input->id;
+	$label = $charges->append('label', 'Color Rate: ');
+	$input = $charges->append('input', null, [
 		'type' => 'number',
-		'name' => 'ad-insertion[color-rate]',
-		'id' => 'ad-insertion[color-rate]',
+		'name' => "{$form->name}[color-rate]",
+		'id' => "{$form->name}[color-rate]",
 		'min' => '0',
 		'step' => 0.01,
 		'value' => '0',
 		'placeholder' => 5.25,
 		'required' => ''
 	]);
-	$charges->append('label', 'Full ', ['for' => 'ad-insertion[q][full]']);
-	$charges->append('input', null, [
+	$label->for = $input->id;
+
+	$label = $charges->append('label', 'Full ');
+	$input = $charges->append('input', null, [
 		'type' => 'radio',
-		'name' => 'ad-insertion[q]',
-		'id' => 'ad-insertion[q][full]',
+		'name' => "{$form->name}[q]",
+		'id' => "{$form->name}[q][full]",
 		'value' => 'full',
 		'placeholder' => '???'
 	]);
-	$charges->append('label', '1 ', ['for' => 'ad-insertion[q][1]']);
-	$charges->append('input', null, [
+	$label->for = $input->id;
+	$label = $charges->append('label', '1 ');
+	$input = $charges->append('input', null, [
 		'type' => 'radio',
-		'name' => 'ad-insertion[q]',
-		'id' => 'ad-insertion[q][1]',
+		'name' => "{$form->name}[q]",
+		'id' => "{$form->name}[q][1]",
 		'value' => '1'
 	]);
-	$charges->append('label', '2 ', ['for' => 'ad-insertion[q][2]']);
-	$charges->append('input', null, [
+	$label->for = $input->id;
+	$label = $charges->append('label', '2 ');
+	$input = $charges->append('input', null, [
 		'type' => 'radio',
-		'name' => 'ad-insertion[q]',
-		'id' => 'ad-insertion[q][2]',
+		'name' => "{$form->name}[q]",
+		'id' => "{$form->name}[q][2]",
 		'value' => '2'
 	]);
+	$label->for = $input->id;
 	$charges->append('br');
+
 	$charges->append('h2', 'Size');
 	$charges->append('hr');
-	$charges->append('label', 'Width: ', ['for' => 'ad-insertion[size][width]']);
-	$charges->append('input', null, [
+
+	$label = $charges->append('label', 'Width: ');
+	$input = $charges->append('input', null, [
 		'type' => 'number',
-		'name' => 'ad-insertion[size][width]',
-		'id' => 'ad-insertion[size][width]',
+		'name' => "{$form->name}[size][width]",
+		'id' => "{$form->name}[size][width]",
 		'min' => '1',
 		'max' => '6',
 		'step' => '1',
 		'placeholder' => 3,
 		'required' => ''
 	]);
-	$charges->append('label', 'Height: ', ['for' => 'ad-insertion[size][height]']);
-	$charges->append('input', null, [
+	$label->for = $input->id;
+	$label = $charges->append('label', 'Height: ');
+	$input = $charges->append('input', null, [
 		'type' => 'number',
-		'name' => 'ad-insertion[size][height]',
-		'id' => 'ad-insertion[size][height]',
+		'name' => "{$form->name}[size][height]",
+		'id' => "{$form->name}[size][height]",
 		'min' => '1',
 		'max' => '21',
 		'step' => '0.5',
 		'placeholder' => 5,
 		'required' => ''
 	]);
+	$label->for = $input->id;
+
 	$charges->append('h2', 'Run Dates');
 	$charges->append('hr');
-	$charges->append('label', 'From: ', ['for' => 'ad-insertion[run][start]']);
-	$charges->append('input', null, [
+	$label = $charges->append('label', 'From: ');
+	$input = $charges->append('input', null, [
 		'type' => 'week',
-		'name' => 'ad-insertion[run][start]',
-		'id' => 'ad-insertion[run][start]',
+		'name' => "{$form->name}[run][start]",
+		'id' => "{$form->name}[run][start]",
 		'placeholder' => 'YYYY-W##',
 		'min' => $date,
 		'value' => $date,
 		'required' => ''
 	]);
-	$charges->append('label', 'To: ', ['for' => 'ad-insertion[run][end]']);
-	$charges->append('input', null, [
+	$label->for = $input->id;
+	$label = $charges->append('label', 'To: ');
+	$input = $charges->append('input', null, [
 		'type' => 'week',
-		'name' => 'ad-insertion[run][end]',
-		'id' => 'ad-insertion[run][end]',
+		'name' => "{$form->name}[run][end]",
+		'id' => "{$form->name}[run][end]",
 		'min' => $date,
 		'value' => $date->modify('+1 week'),
 		'placeholder' => 'YYYY-W##',
 		'required' => ''
 	]);
-	$charges->append('label', null, [
-		'for' => 'ad-insertion[sheets]'
-	])->append('b')->append('abbr', 'TFN', [
-		'title' => 'Tile Further Notice'
-	]);
-	$charges->append('input', null, [
+	$label->for = $input->id;
+	$label = $charges->append('label', null);
+	$label->append('b')->append('abbr', 'TFN', ['title' => 'Tile Further Notice']);
+	$input = $charges->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[sheets]',
-		'id' => 'ad-insertion[sheets]',
+		'name' => "{$form->name}[sheets]",
+		'id' => "{$form->name}[sheets]",
 		'placeholder' => '???'
 	]);
+	$label->for = $input->id;
 	$charges->append('br');
-	$charges->append('label', null, ['for' => 'ad-insertion[pu]'])->append('abbr', 'P/U', ['title' => 'Pick-Up']);
-	$charges->append('input', null, [
+
+	$label = $charges->append('label', null);
+	$label->append('abbr', 'P/U', ['title' => 'Pick-Up']);
+	$input = $charges->append('input', null, [
 		'type' => 'text',
-		'name' => 'ad-insertion[pu]',
-		'id' => 'ad-insertion[pu]',
+		'name' => "{$form->name}[pu]",
+		'id' => "{$form->name}[pu]",
 		'placeholder' => '???'
 	]);
+	$label->for = $input->id;
 	unset($charges);
 
 	$info = $form->append('fieldset');
 	$info->append('legend', 'Ad Description &amp; Info');
 	$info->append('br');
+
 	$info->append('textarea', null, [
-		'name' => 'ad-insertion[info]',
-		'id' => 'ad-insertion[info]',
+		'name' => "{$form->name}[info]",
+		'id' => "{$form->name}[info]",
 		'placeholder' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor.',
 		'required' => ''
 	]);
 	$info->append('br');
-	$info->append('label', 'Attachments: ', ['for' => 'ad-insertion[attachments]']);
-	$info->append('input', null, [
+
+	$label = $info->append('label', 'Attachments: ');
+	$input = $info->append('input', null, [
 		'type' => 'file',
-		'name' => 'ad-insertion[attachments]',
-		'id' => 'ad-insertion[attachments]'
+		'name' => "{$form->name}[attachments]",
+		'id' => "{$form->name}[attachments]"
 	]);
+	$label->for = $input->id;
 	unset($info);
 
 	$form->append('button', null, [
