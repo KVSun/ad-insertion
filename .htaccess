@@ -41,7 +41,7 @@ Options -Indexes +SymLinksIfOwnerMatch
 	Header set Cache-Control "public, must-revalidate, proxy-revalidate, no-transform"
 	Header set X-UA-Compatible "IE=edge,chrome=1"
 	Header set Connection "Keep-Alive"
-	Header set Content-Security-Policy "default-src 'self'; img-src 'self' https://travis-ci.org https://api.travis-ci.org https://badges.gitter.im https://i.imgur.com; report-uri https://report-uri.io/report/8fc7a28e91bbcd83322a6331f6b09dbb;"
+	Header set Content-Security-Policy "default-src 'self'; script-src 'self' resource: 'unsafe-inline'; style-src 'self'; img-src 'self' https://travis-ci.org https://api.travis-ci.org https://badges.gitter.im https://i.imgur.com; font-src 'self'; media-src 'self'; connect-src 'self'; frame-ancestors 'none'; child-src 'self'; form-action 'self'; object-src 'none'; plugin-types 'none; report-uri https://report-uri.io/report/8fc7a28e91bbcd83322a6331f6b09dbb;"
 	# `mod_headers` can't match based on the content-type, however, we only
 	# want to send this header for HTML pages and not for the other resources
 	<FilesMatch "\.(appcache|crx|css|eot|gif|htc|ico|jpe?g|js|m4a|m4v|manifest|mp4|oex|oga|ogg|ogv|otf|pdf|png|safariextz|svg|svgz|ttf|vcf|webapp|webm|webp|woff2?|xml|xpi)$">
