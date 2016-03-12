@@ -29,7 +29,7 @@ return function()
 	$frag('script', null, [
 		'type' => 'application/javascript',
 		'src' => 'scripts/custom.js',
-		'defer' => true
+		'async' => ''
 	]);
 	$frag('meta', null, [
 		'name' => 'description',
