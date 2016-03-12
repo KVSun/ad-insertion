@@ -25,7 +25,6 @@ return function()
 		'href' => 'images/icons.svg',
 		'type' => 'image/svg+xml'
 	]);
-	$frag('base', null, ['href' => $url]);
 	$frag('script', null, [
 		'type' => 'application/javascript',
 		'src' => 'scripts/custom.js',
