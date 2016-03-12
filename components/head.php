@@ -8,6 +8,7 @@ return function()
 	$frag = $dom->createDocumentFragment();
 
 	$frag('title', 'Ad Insertion');
+	$frag('base', null, ['href' => is_array($_SERVER) ? "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}" : '/']);
 	$frag('link', null, [
 		'rel' => 'icon',
 		'href' => 'favicon.svg',
