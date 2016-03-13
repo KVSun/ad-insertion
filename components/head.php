@@ -3,12 +3,12 @@ namespace Components\Head;
 return function()
 {
 	$dom = \shgysk8zer0\DOM\HTML::getInstance();
-	$url = \shgysk8zer0\Core\URL::getInstance();
+	$url = clone \shgysk8zer0\Core\URL::getInstance();
 	unset($url->path, $url->query, $url->fragment, $url->user, $url->pass);
 	$frag = $dom->createDocumentFragment();
 
 	$frag('title', 'Ad Insertion');
-	$frag('base', null, ['href' => is_array($_SERVER) ? "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}" : '/']);
+	$frag('base', null, ['href' => $url]);
 	$frag('link', null, [
 		'rel' => 'icon',
 		'href' => 'favicon.svg',
