@@ -1,9 +1,13 @@
 <?php
 namespace Components\Head;
+
+use \shgysk8zer0\DOM as DOM;
+use \shgysk8zer0\Core as Core;
+
 return function()
 {
-	$dom = \shgysk8zer0\DOM\HTML::getInstance();
-	$url = clone \shgysk8zer0\Core\URL::getInstance();
+	$dom = DOM\HTML::getInstance();
+	$url = Core\URL::getClone();
 	unset($url->path, $url->query, $url->fragment, $url->user, $url->pass);
 	$frag = $dom->createDocumentFragment();
 
