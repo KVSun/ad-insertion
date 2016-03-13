@@ -10,14 +10,6 @@ function build_head(\DOMElement &$head)
 	$head('head');
 }
 
-function cli_config($config = './config/env.json')
-{
-	$config = json_decode(file_get_contents($config), true);
-	foreach ($config as $key => $value) {
-		putenv("$key=$value");
-	}
-}
-
 function build_body(\DOMElement &$body)
 {
 	$body->parentNode->class = 'no-js';
@@ -27,10 +19,7 @@ function build_body(\DOMElement &$body)
 
 function init()
 {
-	if (in_array(PHP_SAPI, ['cli', 'cli-server'])) {
-		cli_config();
-	}
-	require_once realpath(getenv('AUTOLOAD_SCRIPT'));
+	require_once './autoloader.php';
 	Core\Console::getInstance()->asErrorHandler()->asExceptionHandler();
 	DOM\HTMLElement::$import_path = realpath(getenv('COMPONENTS_DIR'));
 

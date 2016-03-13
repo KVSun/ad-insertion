@@ -1,5 +1,14 @@
 <?php
 namespace Autoloader;
+
+function cli_config($config = './config/env.json')
+{
+	$config = json_decode(file_get_contents($config), true);
+	foreach ($config as $key => $value) {
+		putenv("$key=$value");
+	}
+}
+
 function assert_callback($script, $line, $code = 0, $message = null)
 {
 	echo sprintf('Assert failed: [%s:%u] "%s"', $script, $line, $message) . PHP_EOL;
@@ -25,7 +34,9 @@ if (version_compare(PHP_VERSION, getenv('MIN_PHP_VERSION'), '<')) {
 		throw new \Exception(sprintf('PHP version %s or greater required.', getenv('MIN_PHP_VERSION')));
 	}
 }
-
+if (in_array(PHP_SAPI, ['cli', 'cli-server'])) {
+	cli_config();
+}
 // Configure autoloader
 set_include_path(realpath(getenv('AUTOLOAD_DIR')) . PATH_SEPARATOR . getenv('CONFIG_DIR') . DIRECTORY_SEPARATOR . get_include_path());
 spl_autoload_register(getenv('AUTOLOAD_FUNC'));

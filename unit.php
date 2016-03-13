@@ -23,6 +23,7 @@ namespace Unit
 		http_response_code(403);
 		exit();
 	}
-	require_once getenv('AUTOLOAD_SCRIPT');
-	\shgysk8zer0\Core\NamespacedFunction::{'\Test_funcs\lint_scripts_recursive'}(__DIR__);
+	require_once './autoloader.php';
+	require_once './test_funcs.php';
+	\Test_Funcs\lint_scripts_recursive(__DIR__);
 }
