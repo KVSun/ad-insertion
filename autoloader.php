@@ -38,6 +38,6 @@ if (in_array(PHP_SAPI, ['cli', 'cli-server'])) {
 	cli_config();
 }
 // Configure autoloader
-set_include_path(realpath(getenv('AUTOLOAD_DIR')) . PATH_SEPARATOR . getenv('CONFIG_DIR') . DIRECTORY_SEPARATOR . get_include_path());
+set_include_path(realpath(getenv('AUTOLOAD_DIR')) . PATH_SEPARATOR . realpath(getenv('CONFIG_DIR')) . DIRECTORY_SEPARATOR . get_include_path());
 spl_autoload_register(getenv('AUTOLOAD_FUNC'));
 spl_autoload_extensions(getenv('AUTOLOAD_EXTS'));
