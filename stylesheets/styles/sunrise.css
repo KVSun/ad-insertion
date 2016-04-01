@@ -1,0 +1,16 @@
+#sun {
+	animation-name: sunrise;
+	animation-duration: 10300ms;
+	/*animation-iteration-count: infinite;*/
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes sunrise {
+	from {
+		transform: translateY(80%);
+		filter: blur(1px) brightness(60%) opacity(0%);
+	}
+}
